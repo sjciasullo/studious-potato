@@ -12,11 +12,12 @@ MVP (setup for without arduino)
       - maybe a type column that is auto-suggested by from relevant words in description?
     - Questions:
       - Can I link different users experiments by type? so we can do big data visualization
-  - user can CRUD entries for an experiment
+  - user can CRUD sessions/trials for an experiment
     - db
-      - average heart rate data for session
+      - name
       - notes for the session
-    - questions
+    - questions:
+  - user can CRD datapoints for a trial/session
 
 More Features
   - use an arduino for heart rate monitoring to do live session and analysis
@@ -60,4 +61,34 @@ Technologies
   5. Returning user wants to get a printout of an experiment?
       1. clicks on experiment and clicks an email button? 
       2. do we want to keep track of email and check to see if it's valid upon registration?
-      
+  
+# Database
+  - users
+    - username: string unique
+    - password_digest: string
+    - email: string (not required)
+    - auth_token: string
+    - relations:
+      - *has_many* experiments
+  - experiments
+    - title: string (unique per user)
+    - description: text
+    - warning_flag: boolean
+    - relations:
+      - *has_many* trials
+      - *has_many* datapoints, through: trials
+      - *belongs_to* users
+  - trials/sessions
+    - name: string "please put a date here"! unique in experiment
+    - date: date
+    - time: time
+    - notes: text
+    - relations:
+      - *has_many* datapoints
+      - *belongs_to* experiments
+  - datapoints
+    - heartrate: numeric/decimal
+    - date: date
+    - time: time
+    - relations:
+      - *belongs_to* trials
