@@ -1,6 +1,7 @@
 class SessionsController < ApiController
   skip_before_action :require_login, only: [:create], raise: false
 
+  # login user
   def create
     # if the user login is valid, make a new token for user, then send the token to front
     if user = User.validate_login(params[:username], params[:password])
@@ -12,6 +13,7 @@ class SessionsController < ApiController
     end
   end
 
+  # logout user
   def destroy
     logout
     head: ok
