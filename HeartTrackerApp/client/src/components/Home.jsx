@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import Auth from '../modules/Auth';
 
 class Home extends Component{
   constructor(props){
+    // prop list
+    //    - this.props.updateAuthState() => updates the state of auth in App for login
     super(props);
     this.state={
       page: "login",
@@ -27,7 +30,34 @@ class Home extends Component{
   // ----- handle form functions -----
   submitLogin(e){
     e.preventDefault();
-    console.log("login execute")
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    }).then(res => res.json())
+    .then(json => {
+      console.log(json);
+      if (json.token) {
+        // if there is a token on the response, add it to session storage
+        Auth.authenticateToken(json.token);
+
+        // updates the state of auth in App
+        this.props.updateAuthState();
+
+        // clear username and password from state
+        this.setState({
+          username: '',
+          password: '',
+        })
+      }
+    }).catch( err => {
+      console.log(err);
+    })
   }
 
   submitRegister(e){

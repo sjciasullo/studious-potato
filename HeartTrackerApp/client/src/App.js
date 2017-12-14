@@ -16,15 +16,24 @@ class App extends Component {
     super();
     this.state= {
       auth: Auth.isUserAuthenticated(), // check if there is a token in storage
-
+      // do i need a username or something? we use 
     }
+
+    this.updateAuthState = this.updateAuthState.bind(this);
   }
+
+  updateAuthState(){
+    this.setState({
+      auth: Auth.isUserAuthenticated()
+    })
+  }
+
   render() {
     return (
       <Router >
         <div className="App">
           {this.state.auth && <Header />}
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' render={() => <Home updateAuthState={this.updateAuthState} />} />
         </div>
       </Router>
     );
