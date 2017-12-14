@@ -15,7 +15,7 @@ class Home extends Component{
 
     this.toggleForm = this.toggleForm.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
-    this.submitLogin = this.submitRegister.bind(this);
+    this.submitRegister = this.submitRegister.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -27,7 +27,7 @@ class Home extends Component{
   // ----- handle form functions -----
   submitLogin(e){
     e.preventDefault();
-
+    console.log("login execute")
   }
 
   submitRegister(e){
