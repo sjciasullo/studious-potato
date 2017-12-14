@@ -10,6 +10,7 @@ class Home extends Component{
     super(props);
     this.state={
       page: "login",
+      error: "",
       username: "",
       password: "",
       name: "",
@@ -53,6 +54,11 @@ class Home extends Component{
         this.setState({
           username: '',
           password: '',
+          error: '',
+        })
+      } else {
+        this.setState({
+          error: json.errors[0].detail
         })
       }
     }).catch( err => {
@@ -104,7 +110,7 @@ class Home extends Component{
       <div className='home'>
         <h1 className='title'>Heart Tracker</h1>
         {Form}
-        
+        {this.state.error !== '' && <p className="error">{this.state.error}</p>}
       </div>
     )
   }
