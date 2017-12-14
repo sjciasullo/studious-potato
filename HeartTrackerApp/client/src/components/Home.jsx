@@ -58,7 +58,8 @@ class Home extends Component{
         })
       } else {
         this.setState({
-          error: json.errors[0].detail
+          error: json.errors[0].detail,
+          password: '',
         })
       }
     }).catch( err => {
