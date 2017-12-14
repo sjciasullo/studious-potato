@@ -16,7 +16,7 @@ class SessionsController < ApiController
   # logout user
   def destroy
     logout
-    head: ok
+    head :ok
   end
 
   private
