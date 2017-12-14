@@ -37,12 +37,11 @@ class Home extends Component{
 
   // controlled component flow
   handleChange(e){
-    console.log(e.target);
     const key = e.target.name;
     const value = e.target.value;
-    this.setState={
+    this.setState({
       [key]: value,
-    }
+    })
   }
   // ----- end handle form functions -----
 
@@ -51,21 +50,21 @@ class Home extends Component{
     let Form = null;
     if(this.state.page === 'login') {
       Form = <LoginForm 
-              toggleForm={this.toggleForm} 
-              handleChange={this.handleChange}
-              submitLogin={this.submitLogin}
-              username={this.state.username}
-              password={this.state.password}
+                toggleForm={this.toggleForm} 
+                handleChange={this.handleChange}
+                submitLogin={this.submitLogin}
+                username={this.state.username}
+                password={this.state.password}
               />;
     } else if(this.state.page === 'register') {
       Form = <RegisterForm 
-              toggleForm={this.toggleForm} 
-              handleChange={this.handleChange}
-              submitRegister={this.submitRegister}
-              username={this.state.username}
-              password={this.state.password}
-              name={this.state.name}
-              email={this.state.email}
+                toggleForm={this.toggleForm} 
+                handleChange={this.handleChange}
+                submitRegister={this.submitRegister}
+                username={this.state.username}
+                password={this.state.password}
+                name={this.state.name}
+                email={this.state.email}
               />;
     } else {
       Form = <p>An error has occurred!</p>
