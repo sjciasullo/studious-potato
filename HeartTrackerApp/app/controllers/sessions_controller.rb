@@ -24,7 +24,7 @@ class SessionsController < ApiController
   end
 
   def logout
-    #uses api controller to take token off of user
+    #uses api controller's current_user and User's invalidate_token to take token off of user
     current_user.invalidate_token
   end
 
