@@ -74,21 +74,20 @@ Technologies
     - title: string (unique per user)
     - description: text
     - warning_flag: boolean
+    - current_trial: integer default 0, increments when new trial created
     - relations:
       - *has_many* trials
       - *has_many* datapoints, through: trials
       - *belongs_to* users
   - trials/sessions
-    - name: string "please put a date here"! unique in experiment
-    - date: date
-    - time: time
+    - trial_num: integer increments based on current trial of experiment
+    - data_creation: (active record)
     - notes: text
     - relations:
       - *has_many* datapoints
       - *belongs_to* experiments
   - datapoints
     - heartrate: numeric/decimal
-    - date: date
-    - time: time
+    - date_created: (active record)
     - relations:
       - *belongs_to* trials
