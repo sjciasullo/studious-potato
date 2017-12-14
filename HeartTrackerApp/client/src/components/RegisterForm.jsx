@@ -5,10 +5,14 @@ const RegisterForm = function(props) {
   const toggleForm = props.toggleForm;
   const submitLogin = props.submitLogin;
   const handleChange = props.handleChange;
+  const username = props.username;
+  const password = props.password;
+  const name = props.name;
+  const email = props.email;
 
   return(
     <div>
-      <h2>Register</h2>
+      <h2>Register new user</h2>
       <p>Already have an account? <span className='changeform' onClick={toggleForm}>Login</span></p>
     </div>
   )

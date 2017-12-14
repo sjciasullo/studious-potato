@@ -9,6 +9,8 @@ class Home extends Component{
       page: "login",
       username: "",
       password: "",
+      name: "",
+      email: ""
     }
 
     this.toggleForm = this.toggleForm.bind(this);
@@ -23,16 +25,24 @@ class Home extends Component{
   }
 
   // ----- handle form functions -----
-  submitLogin(){
+  submitLogin(e){
+    e.preventDefault();
 
   }
 
-  submitRegister(){
-
+  submitRegister(e){
+    e.preventDefault();
+    
   }
 
-  handleChange(){
-
+  // controlled component flow
+  handleChange(e){
+    console.log(e.target);
+    const key = e.target.name;
+    const value = e.target.value;
+    this.setState={
+      [key]: value,
+    }
   }
   // ----- end handle form functions -----
 
@@ -44,12 +54,18 @@ class Home extends Component{
               toggleForm={this.toggleForm} 
               handleChange={this.handleChange}
               submitLogin={this.submitLogin}
+              username={this.state.username}
+              password={this.state.password}
               />;
     } else if(this.state.page === 'register') {
       Form = <RegisterForm 
               toggleForm={this.toggleForm} 
               handleChange={this.handleChange}
               submitRegister={this.submitRegister}
+              username={this.state.username}
+              password={this.state.password}
+              name={this.state.name}
+              email={this.state.email}
               />;
     } else {
       Form = <p>An error has occurred!</p>
@@ -59,6 +75,7 @@ class Home extends Component{
       <div className='home'>
         <h1 className='title'>Heart Tracker</h1>
         {Form}
+        
       </div>
     )
   }
