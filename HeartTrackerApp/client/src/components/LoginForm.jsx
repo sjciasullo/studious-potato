@@ -9,7 +9,7 @@ const LoginForm = function(props) {
   return(
     <div>
       <h2>Login</h2>
-      <p>Don't have an account? <span onClick={toggleForm}>Register</span></p>
+      <p>Don't have an account? <span className='changeform' onClick={toggleForm}>Register</span></p>
     </div>
   )
 }

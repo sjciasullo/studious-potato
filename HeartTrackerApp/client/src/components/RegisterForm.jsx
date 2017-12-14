@@ -9,7 +9,7 @@ const RegisterForm = function(props) {
   return(
     <div>
       <h2>Register</h2>
-      <p>Already have an account? <span onClick={toggleForm}>Login</span></p>
+      <p>Already have an account? <span className='changeform' onClick={toggleForm}>Login</span></p>
     </div>
   )
 }
