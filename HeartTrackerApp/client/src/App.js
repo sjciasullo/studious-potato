@@ -1,19 +1,32 @@
+// components
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Header from './components/Header';
+import Home from './components/Home';
+
+// helpers
+import Auth from './modules/Auth';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+//style
 import './App.css';
 
+
 class App extends Component {
+  constructor(){
+    super();
+    this.state= {
+      auth: Auth.isUserAuthenticated(), // check if there is a token in storage
+
+    }
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router >
+        <div className="App">
+          {this.state.auth && <Header />}
+          <Route exact path='/' component={Home} />
+        </div>
+      </Router>
     );
   }
 }
