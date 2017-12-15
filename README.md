@@ -72,7 +72,7 @@ Technologies
       - *has_many* experiments
   - experiments
     - title: string (unique per user)
-      - checkout unique by column 
+      - checkout unique by column -> used validate_uniqueness_of with scope:
     - description: text
     - warning_flag: boolean
     - current_trial: integer default 0, increments when new trial created
