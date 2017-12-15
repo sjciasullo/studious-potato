@@ -21,9 +21,16 @@
   - Solution: "head: ok" to "head :ok"
   - Problem: typo
 
-### Template
+### login again
   - Trigger: close page and re-open, try to log in
   - Location: sessionsController
   - Message: NoMethodError (undefined method `allow_token_to_be_used_only_once_for' for #<SessionsController:0x007fb66d4b7398>):
   - Solution: define the method `allow_token_to_be_used_only_once_for'
   - Problem: forgot to define this method in private of sessionsController, encountered other model function not implemented but used. 
+
+### logout not working, gets to back end but invalidate_token not working
+  - Trigger: click logout
+  - Location: sessionscontroller calling currentuser.invalidate_token
+  - Message: NoMethodError 'invalidate_token' for nil:NilClass
+  - Solution: change "header" in fetch to "headers"
+  - Problem: a typo in fetch

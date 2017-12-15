@@ -33,9 +33,9 @@ class App extends Component {
   logout(){
     fetch('/logout', {
       method: 'DELETE',
-      header: {
-        'Authorization': `Token ${Auth.getToken()}`,
+      headers: {
         token: Auth.getToken(),
+        'Authorization': `Token ${Auth.getToken()}`,
       }
     }).then ( res => {
       Auth.deauthenticateUser();

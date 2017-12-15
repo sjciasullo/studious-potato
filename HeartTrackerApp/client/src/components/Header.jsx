@@ -9,9 +9,9 @@ const Header = function(props){
         <div>
           username(link)
         </div>
-        <a href='/' onClick={logout()}>
+        <button onClick={logout}>
           logout
-        </a>
+        </button>
       </div>
     </header>
   )
