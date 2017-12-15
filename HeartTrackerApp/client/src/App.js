@@ -64,7 +64,8 @@ class App extends Component {
           />
 
           {/* After register/login a user is directed to their dash */}
-          <Route exact path='/dash' render={() => <Dashboard />} />
+
+          <Route exact path='/dash' render={() => this.state.auth ? <Dashboard /> : <Redirect to='/' />} />
          
           
         </div>
