@@ -9,3 +9,14 @@
 .changeform:hover {
   color: red;
 }
+
+header {
+  display: flex;
+  justify-content: space-between
+}
+
+.user-nav{
+  display: flex;
+  min-width: 25vw;
+  justify-content: space-around;
+}
