@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   USERNAME_LENGTH = (5..15)
-  # ensures uniequeness of username
   validates_uniqueness_of :username
   validates :username, length: USERNAME_LENGTH
   
   #handles password hashing and saves a password as password_digest
   has_secure_password
   has_secure_token :auth_token
+
+  has_many :experiments
 
   def invalidate_token
     self.update_columns(auth_token: nil)
