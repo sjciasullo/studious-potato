@@ -38,7 +38,7 @@ class App extends Component {
           {/* Home page has login and register form functionality */}
           <Route exact path='/' render={() =>
             !this.state.auth ? (
-              <Home updateAuthState={this.state.updateAuthState} />
+              <Home updateAuthState={this.updateAuthState} />
             ) : (
               <Redirect to="/dash" />
             )} 
