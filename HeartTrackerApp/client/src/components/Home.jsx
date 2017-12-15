@@ -9,12 +9,12 @@ class Home extends Component{
     //    - this.props.updateAuthState() => updates the state of auth in App for login
     super(props);
     this.state={
-      page: "login",
-      error: "",
-      username: "",
-      password: "",
-      name: "",
-      email: ""
+      page: 'login',
+      error: '',
+      username: '',
+      password: '',
+      name: '',
+      email: ''
     }
 
     this.toggleForm = this.toggleForm.bind(this);
@@ -25,12 +25,22 @@ class Home extends Component{
 
   //will toggle form from register to login
   toggleForm(){
-    this.state.page === 'login' ? this.setState({page: 'register'}) : this.setState({page: 'login'});
+    let page = null;
+    this.state.page === 'login' ? page = 'register' : page = 'login';
+    this.setState({
+      error: '', // take off error message if there was one
+      page: page,
+    })
   }
 
   // ----- handle form functions -----
   submitLogin(e){
     e.preventDefault();
+
+    this.setState({
+      error: '',
+    }) // clear error message
+
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -54,7 +64,6 @@ class Home extends Component{
         this.setState({
           username: '',
           password: '',
-          error: '',
         })
       } else {
         // if there is no token, this means failed login so display an error
@@ -70,6 +79,11 @@ class Home extends Component{
 
   submitRegister(e){
     e.preventDefault();
+
+    this.setState({
+      error: '',
+    }) // clear error message
+    
     // similar to submit login, but needs a user object to be sent in post request
     fetch('/users', {
       method: 'POST',
@@ -90,17 +104,17 @@ class Home extends Component{
         Auth.authenticateToken(json.token);
         this.props.updateAuthState();
 
-        // clear username and password from state
+        // clear user data from state
         this.setState({
           username: '',
           password: '',
-          error: '',
+          name: '',
+          email: '',
         })
       } else {
         // if there is no token, this means register failed so display an error
-        console.log(json)
         this.setState({
-          error: "Invalid registration. Try a different username or don't leave password blank!",
+          error: "Invalid registration. Requires unique username and a valid password!",
           password: '',
           username: '',
         })
