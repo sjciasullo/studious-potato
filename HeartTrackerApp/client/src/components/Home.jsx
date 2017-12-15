@@ -57,6 +57,7 @@ class Home extends Component{
           error: '',
         })
       } else {
+        // if there is no token, this means failed login so display an error
         this.setState({
           error: json.errors[0].detail,
           password: '',
@@ -69,7 +70,44 @@ class Home extends Component{
 
   submitRegister(e){
     e.preventDefault();
-    
+    // similar to submit login, but needs a user object to be sent in post request
+    fetch('/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          name: this.state.name,
+          username: this.state.username,
+          password: this.state.password,
+          email: this.state.email
+        }
+      })
+    }).then(res => res.json())
+    .then(json => {
+      if (json.token) {
+        Auth.authenticateToken(json.token);
+        this.props.updateAuthState();
+
+        // clear username and password from state
+        this.setState({
+          username: '',
+          password: '',
+          error: '',
+        })
+      } else {
+        // if there is no token, this means register failed so display an error
+        console.log(json)
+        this.setState({
+          error: "Invalid registration. Try a different username or don't leave password blank!",
+          password: '',
+          username: '',
+        })
+      }
+    }).catch( err => {
+      console.log(err);
+    })
   }
 
   // controlled component flow
