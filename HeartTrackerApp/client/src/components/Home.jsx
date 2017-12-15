@@ -5,8 +5,8 @@ import Auth from '../modules/Auth';
 
 class Home extends Component{
   constructor(props){
-    // prop list
-    //    - this.props.updateAuthState() => updates the state of auth in App for login
+    // prop list:
+    //   > this.props.updateAuthState() => updates the state of auth in App for login
     super(props);
     this.state={
       page: 'login',
@@ -136,7 +136,7 @@ class Home extends Component{
 
 
   render(){
-    let Form = null;
+    let Form = null; // Form for Naming Component Convention (capitalized)
     if(this.state.page === 'login') {
       Form = <LoginForm 
                 toggleForm={this.toggleForm} 
