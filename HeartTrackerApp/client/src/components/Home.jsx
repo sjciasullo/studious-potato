@@ -52,7 +52,6 @@ class Home extends Component{
       })
     }).then(res => res.json())
     .then(json => {
-      console.log(json);
       if (json.token) {
         // if there is a token on the response, add it to session storage
         Auth.authenticateToken(json.token);
