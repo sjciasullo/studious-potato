@@ -72,9 +72,11 @@ Technologies
       - *has_many* experiments
   - experiments
     - title: string (unique per user)
+      - checkout unique by column 
     - description: text
     - warning_flag: boolean
     - current_trial: integer default 0, increments when new trial created
+      - checkout hooks in active record
     - relations:
       - *has_many* trials
       - *has_many* datapoints, through: trials
