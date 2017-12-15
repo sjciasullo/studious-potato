@@ -9,7 +9,15 @@
     - finish wireframes before setup
     - edit user stories to fit wireframes
 
+  - Completed:
+    - user auth front to back
+    - this includes some React and hooked together with API
+    - began logic of React app with an error div that can come up
+    - changing some trajectory of friday. . .
+
 ### Friday, December 15, 2017
+  - finish api with tables that user has
+    - experiments, sessions(the trial table, not a browser session. ok maybe the table should be called trials...), datapoints
   - React app Day!!
   - Setup all of React, and user flow
     - for add data, just have a form view
