@@ -56,14 +56,14 @@ class Home extends Component{
         // if there is a token on the response, add it to session storage
         Auth.authenticateToken(json.token);
 
-        // updates the state of auth in App
-        this.props.updateAuthState();
-
         // clear username and password from state
         this.setState({
           username: '',
           password: '',
         })
+
+         // updates the state of auth in App
+         this.props.updateAuthState();
       } else {
         // if there is no token, this means failed login so display an error
         this.setState({
@@ -101,7 +101,6 @@ class Home extends Component{
     .then(json => {
       if (json.token) {
         Auth.authenticateToken(json.token);
-        this.props.updateAuthState();
 
         // clear user data from state
         this.setState({
@@ -110,6 +109,8 @@ class Home extends Component{
           name: '',
           email: '',
         })
+
+        this.props.updateAuthState();
       } else {
         // if there is no token, this means register failed so display an error
         this.setState({
