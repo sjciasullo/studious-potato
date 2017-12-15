@@ -25,6 +25,10 @@ class SessionsController < ApiController
     render json: {token: user.auth_token}
   end
 
+  def allow_token_to_be_used_only_once_for(user)
+    user.regenerate_auth_token
+  end
+
   def logout
     #uses api controller's current_user and User's invalidate_token to take token off of user
     current_user.invalidate_token
