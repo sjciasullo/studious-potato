@@ -21,6 +21,7 @@ class App extends Component {
     }
 
     this.updateAuthState = this.updateAuthState.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   updateAuthState(){
@@ -29,11 +30,29 @@ class App extends Component {
     })
   }
 
+  logout(){
+    fetch('/logout', {
+      method: 'DELETE',
+      header: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then ( res => {
+      Auth.deauthenticateUser();
+      this.setState({
+        auth: Auth.isUserAuthenticated(),
+        //maybe reset username if we use it
+      })
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <Router >
         <div className="App">
-          {this.state.auth && <Header />}
+          {this.state.auth && <Header logout={this.logout} />}
 
           {/* Home page has login and register form functionality */}
           <Route exact path='/' render={() =>

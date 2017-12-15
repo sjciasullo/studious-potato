@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Header = function(props){
+  const logout = props.logout; // logout method
   return(
     <header>
       <div className='logo'>logo</div>
@@ -8,9 +9,9 @@ const Header = function(props){
         <div>
           username(link)
         </div>
-        <div>
+        <a href='/' onClick={logout()}>
           logout
-        </div>
+        </a>
       </div>
     </header>
   )

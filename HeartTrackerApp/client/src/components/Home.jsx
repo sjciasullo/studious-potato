@@ -68,7 +68,7 @@ class Home extends Component{
       } else {
         // if there is no token, this means failed login so display an error
         this.setState({
-          error: json.errors[0].detail,
+          error: "No match found between username and password",
           password: '',
         })
       }
