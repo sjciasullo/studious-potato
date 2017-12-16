@@ -8,6 +8,7 @@ class ExperimentsController < ApiController
   end
 
   def show
+    render json: { experiment: Experiment.find(params[:id])}
   end
 
   def create
