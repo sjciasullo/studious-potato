@@ -1,8 +1,11 @@
 import React from 'react';
 
 const ExperimentSingle= function (props) {
+  const experiment = props.experiment;
   return(
-    <p>this is experiment single</p>
+    <div>
+      <h3>{experiment.title}</h3>
+    </div>
   )
 }
 

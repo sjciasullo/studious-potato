@@ -61,7 +61,7 @@ class UserController extends Component {
         this.getUserExperiments();
         break;
       case 'experimentSingle':
-        this.getSingleExperiment(this.props.exerimentId);
+        this.getSingleExperiment(this.props.experimentId);
         break;
       default:
         //this should never happen
