@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from './Dashboard';
+import ExperimentSingle from './ExperimentSingle';
 
 class UserController extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class UserController extends Component {
         this.getUserExperiments();
         break;
       case 'experimentSingle':
-        this.getSingleExperiment(this.props.match.params.id);
+        this.getSingleExperiment(this.props.exerimentId);
         break;
       default:
         //this should never happen
