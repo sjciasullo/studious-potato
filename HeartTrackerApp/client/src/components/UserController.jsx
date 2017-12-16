@@ -10,6 +10,7 @@ class UserController extends Component {
     this.state = {
       apiLoaded: false,
       experiments: [],
+      experimentShow: null,
     }
     this.getUserExperiments = this.getUserExperiments.bind(this);
   }
@@ -33,12 +34,33 @@ class UserController extends Component {
     })
   }
 
+  getSingleExperiment(id) {
+    fetch(`/experiments/${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then( res => res.json())
+    .then( json => {
+      this.setState({
+        apiLoaded: true,
+        experimentShow: json.experiment,
+      })
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
   // ----- end user fetches -----
 
   decideFetch(){
     switch(this.props.page) {
       case 'dashboard':
         this.getUserExperiments();
+        break;
+      case 'experimentShow':
+        this.getSingleExperiment();
         break;
       default:
         //this should never happen
