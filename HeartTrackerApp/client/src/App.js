@@ -71,6 +71,15 @@ class App extends Component {
               <Redirect to='/' />
             )} 
           />
+
+          {/* After register/login a user is directed to their dashboard */}
+          <Route exact path='/experiment/:id' render={() => 
+            this.state.auth ? (
+              <UserController page='experimentSingle' />
+            ) : (
+              <Redirect to='/' />
+            )} 
+          />
          
           
         </div>
