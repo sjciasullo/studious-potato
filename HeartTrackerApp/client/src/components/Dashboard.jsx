@@ -1,50 +1,28 @@
-import React, { Component } from 'react';
-import Auth from '../modules/Auth';
+import React from 'react';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apiLoaded: false,
-      experiments: []
-    }
-    this.getUserExperiments = this.getUserExperiments.bind(this);
-  }
+const Dashboard = function(props) {
+  // prop list
+  const experiments = props.experiments;
 
-  getUserExperiments(){
-    fetch('/experiments', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Token ${Auth.getToken()}`,
-        token: Auth.getToken(),
-      }
-    }).then( res => res.json())
-    .then( json => {
-      this.setState({
-        apiLoaded: true,
-        experiments: json.experiments,
-      })
-    }).catch(err => {
-      console.log(err);
-    })
-  }
-
-  componentDidMount(){
-    this.getUserExperiments();
-  }
-
-  render() {
-    return(
-      <div className='dash_container'>
-        <h2>Your Experiments</h2>
-        { this.state.apiLoaded ? (
-          <p>experiments</p>
-        ) : (
-          <p>Loading</p>
-        ) }
-      </div>
-    )
-  }
+  return(
+    <div className='dash_container'>
+      <h2>Your Experiments</h2>
+      
+    </div>
+  )
 }
+
+/*
+{experiments.map( experiment => {
+        return (
+          <div className='experiment-short'>
+            <h3>{experiment.name}</h3>
+            <p>Created at: {experiment.created_at}</p>
+            <p>Updated at: {experiment.updated_at}</p>
+            <p>{experiment.description}</p>
+          </div>
+        )
+      })}
+*/
 
 export default Dashboard;

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Home from './components/Home';
-import Dashboard from './components/Dashboard';
+import UserController from './components/UserController';
 
 // helpers
 import Auth from './modules/Auth';
@@ -59,13 +59,18 @@ class App extends Component {
             !this.state.auth ? (
               <Home updateAuthState={this.updateAuthState} />
             ) : (
-              <Redirect to="/dash" />
+              <Redirect to="/dashboard" />
             )} 
           />
 
-          {/* After register/login a user is directed to their dash */}
-
-          <Route exact path='/dash' render={() => this.state.auth ? <Dashboard /> : <Redirect to='/' />} />
+          {/* After register/login a user is directed to their dashboard */}
+          <Route exact path='/dashboard' render={() => 
+            this.state.auth ? (
+              <UserController page='dashboard' />
+            ) : (
+              <Redirect to='/' />
+            )} 
+          />
          
           
         </div>
