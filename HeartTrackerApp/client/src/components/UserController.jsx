@@ -49,24 +49,24 @@ class UserController extends Component {
     this.decideFetch();
   }
 
-  // returns jsx of component we want
+  // returns jsx of component as selected by page prop which is decided from Router
   decideRender(){
-    return <Dashboard experiments={this.state.experiments} />
-    // switch(this.props.page) {
-    //   case 'dashboard':
-    //     return <Dashboard experiments={this.state.experiments} />
-    //   default:
-    //     return <p>An error has occurred! Please contact the developer, you hacker</p>
-    // }
+    switch(this.props.page) {
+      case 'dashboard':
+        return <Dashboard experiments={this.state.experiments} />
+      default:
+        return <p>An error has occurred! Please contact the developer, you hacker</p>
+    }
   }
 
   render() {
-    //const UserComponent = this.decideRender();
-    const UserComponent = <Dashboard experiments={this.state.experiments} />
     return(
       <div className='dash_container'>
         { this.state.apiLoaded ? (
-          <Dashboard experiments={this.state.experiments} />
+          <div className='component-container'>
+            {this.decideRender()}
+          </div>
+          
         ) : (
           <p>loading</p>
         )}
