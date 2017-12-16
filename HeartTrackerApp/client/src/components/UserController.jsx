@@ -51,22 +51,24 @@ class UserController extends Component {
 
   // returns jsx of component we want
   decideRender(){
-    switch(this.props.page) {
-      case 'dashboard':
-        return <Dashboard experiments={this.state.experiments} />
-      default:
-        return <p>An error has occurred! Please contact the developer, you hacker</p>
-    }
+    return <Dashboard experiments={this.state.experiments} />
+    // switch(this.props.page) {
+    //   case 'dashboard':
+    //     return <Dashboard experiments={this.state.experiments} />
+    //   default:
+    //     return <p>An error has occurred! Please contact the developer, you hacker</p>
+    // }
   }
 
   render() {
-    const UserComponent = this.decideRender();
+    //const UserComponent = this.decideRender();
+    const UserComponent = <Dashboard experiments={this.state.experiments} />
     return(
       <div className='dash_container'>
         { this.state.apiLoaded ? (
-          <p>loading</p>
+          <Dashboard experiments={this.state.experiments} />
         ) : (
-          {UserComponent}
+          <p>loading</p>
         )}
       </div>
     )
