@@ -1,16 +1,26 @@
 class ExperimentsController < ApiController
-  def index
-  end
+  before_action :require_login
 
-  def create
+  def index
+    @user = current_user
+    experiments = Experiment.all.where(user_id: @user.id)
+    render json: { experiments: experiments}
   end
 
   def show
+  end
+
+  def create
   end
 
   def update
   end
 
   def destroy
+  end
+
+  private
+  def experiment_params
+    params.require(:experiment).permit(:title, :warning_flag)
   end
 end
