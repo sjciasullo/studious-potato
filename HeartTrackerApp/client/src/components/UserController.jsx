@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Auth from '../modules/Auth';
 import Dashboard from './Dashboard';
 import ExperimentSingle from './ExperimentSingle';
+import ExperimentForm from './ExperimentForm';
 
 class UserController extends Component {
   constructor(props) {
@@ -13,8 +14,14 @@ class UserController extends Component {
       experiments: [],
       experimentSingle: null,
       message: null,
+
+      // for forms
+      experimentTitle: '',
+      experimentDescription: '',
+      //experimentFlag: true,
     }
-    this.getUserExperiments = this.getUserExperiments.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submitExperiment = this.submitExperiment.bind(this);
   }
 
   // ----- possible user fetches -----
@@ -57,6 +64,40 @@ class UserController extends Component {
 
   // ----- end user fetches -----
 
+  // ----- functions for forms -----
+
+  handleChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [key]: value
+    })
+  }
+
+  submitExperiment(e) {
+    e.preventDefault();
+    fetch('/experiments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        experiment: {
+          title: this.state.experimentTitle,
+          description: this.state.description,
+        }
+      })
+    }).then( res => res.json())
+    .then( json => {
+      console.log(json);
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
+  // ----- end form functions -----
   decideFetch(){
     switch(this.props.page) {
       case 'dashboard':
@@ -66,7 +107,10 @@ class UserController extends Component {
         this.getSingleExperiment(this.props.experimentId);
         break;
       default:
-        //this should never happen
+        //set loaded to true because no data needed
+        this.setState({
+          apiLoaded: true,
+        })
     }
   }
 
@@ -84,6 +128,13 @@ class UserController extends Component {
                   experiment={this.state.experimentSingle} 
                   message={this.state.message}
                 />
+      case 'experimentCreate':
+        return <ExperimentForm 
+                  experimentTitle={this.state.experimentTitle}
+                  experimentDescription={this.state.experimentDescription}
+                  handleChange={this.handleChange}
+                  submitExperiment={this.submitExperiment}
+               />
       default:
         return <p>An error has occurred! Please contact the developer, you hacker</p>
     }

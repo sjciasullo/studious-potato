@@ -71,8 +71,17 @@ class App extends Component {
               <Redirect to='/' />
             )} 
           />
+          
+          {/* has to go above experiment/:id, this is create an experiment route*/}
+          <Route exact path='/create-experiment' render={() => 
+            this.state.auth ? (
+              <UserController page='experimentCreate' />
+            ) : (
+              <Redirect to='/' />
+            )} 
+          />
 
-          {/* After register/login a user is directed to their dashboard */}
+          {/* Route to a single experiment */}
           <Route exact path='/experiment/:id' render={(props) => 
             this.state.auth ? (
               <UserController page='experimentSingle' experimentId={props.match.params.id}/>
@@ -80,6 +89,8 @@ class App extends Component {
               <Redirect to='/' />
             )} 
           />
+
+          
          
           
         </div>
