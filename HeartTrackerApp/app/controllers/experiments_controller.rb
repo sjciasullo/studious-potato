@@ -8,7 +8,12 @@ class ExperimentsController < ApiController
   end
 
   def show
-    render json: { experiment: Experiment.find(params[:id])}
+    experiment = Experiment.find(params[:id])
+    if experiment.user_id != current_user.id
+      render json: {message: 'Not your experiment!'} 
+    else
+      render json: { experiment: Experiment.find(params[:id])}
+    end
   end
 
   def create
