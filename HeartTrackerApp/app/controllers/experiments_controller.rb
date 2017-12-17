@@ -12,7 +12,7 @@ class ExperimentsController < ApiController
     if experiment.user_id != current_user.id
       render json: {message: 'Not your experiment!'} 
     else
-      render json: { experiment: Experiment.find(params[:id])}
+      render json: { experiment: Experiment.find(params[:id]), message: 'ok'}
     end
   end
 

@@ -11,7 +11,8 @@ class UserController extends Component {
     this.state = {
       apiLoaded: false,
       experiments: [],
-      experimentSingle: null
+      experimentSingle: null,
+      message: null,
     }
     this.getUserExperiments = this.getUserExperiments.bind(this);
   }
@@ -47,6 +48,7 @@ class UserController extends Component {
       this.setState({
         apiLoaded: true,
         experimentSingle: json.experiment,
+        message: json.message,
       })
     }).catch( err => {
       console.log(err);
@@ -78,7 +80,10 @@ class UserController extends Component {
       case 'dashboard':
         return <Dashboard experiments={this.state.experiments} />
       case 'experimentSingle':
-        return <ExperimentSingle experiment={this.state.experimentSingle} />
+        return <ExperimentSingle 
+                  experiment={this.state.experimentSingle} 
+                  message={this.state.message}
+                />
       default:
         return <p>An error has occurred! Please contact the developer, you hacker</p>
     }
