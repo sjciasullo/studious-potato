@@ -7,7 +7,7 @@ const Dashboard = function(props) {
   return(
     <div className='dash_container'>
       <h2>Your Experiments</h2>
-      <a href='experiment/create'><button>New Experiment</button></a>
+      <a href='create-experiment'><button>New Experiment</button></a>
       {experiments.map( (experiment, index) => {
         return (
           <div className='experiment-short' key={index}>

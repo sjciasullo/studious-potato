@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import Auth from '../modules/Auth';
 import Dashboard from './Dashboard';
 import ExperimentSingle from './ExperimentSingle';
@@ -14,6 +16,10 @@ class UserController extends Component {
       experiments: [],
       experimentSingle: null,
       message: null,
+
+      //redirecter
+      fireRedirect: false,
+      redirectRoute: '',
 
       // for forms
       experimentTitle: '',
@@ -86,18 +92,23 @@ class UserController extends Component {
       body: JSON.stringify({
         experiment: {
           title: this.state.experimentTitle,
-          description: this.state.description,
+          description: this.state.experimentDescription,
         }
       })
     }).then( res => res.json())
     .then( json => {
-      console.log(json);
+      this.setState({
+        fireRedirect: true,
+        redirectRoute: `/experiment/${json.experiment.id}`
+      })
     }).catch( err => {
       console.log(err);
     })
   }
 
   // ----- end form functions -----
+
+  // 
   decideFetch(){
     switch(this.props.page) {
       case 'dashboard':
@@ -115,6 +126,11 @@ class UserController extends Component {
   }
 
   componentDidMount(){
+    //reset 
+    this.setState({
+      fireRedirect: false,
+      redirectPath: ''
+    })
     this.decideFetch();
   }
 
@@ -143,6 +159,7 @@ class UserController extends Component {
   render() {
     return(
       <div className='dash-container'>
+        {this.state.fireRedirect && <Redirect to={this.state.redirectRoute} />}
         { this.state.apiLoaded ? (
           <div className='component-container'>
             {this.decideRender()}
