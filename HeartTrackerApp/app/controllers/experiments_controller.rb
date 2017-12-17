@@ -17,6 +17,7 @@ class ExperimentsController < ApiController
   end
 
   def create
+    experiment = Experiment.new(experiment_params)
   end
 
   def update
@@ -27,6 +28,6 @@ class ExperimentsController < ApiController
 
   private
   def experiment_params
-    params.require(:experiment).permit(:title, :warning_flag)
+    params.require(:experiment).permit(:title, :description, :warning_flag)
   end
 end
