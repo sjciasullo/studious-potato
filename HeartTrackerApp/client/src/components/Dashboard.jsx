@@ -7,10 +7,10 @@ const Dashboard = function(props) {
   return(
     <div className='dash_container'>
       <h2>Your Experiments</h2>
-      {experiments.map( experiment => {
+      {experiments.map( (experiment, index) => {
         return (
-          <div className='experiment-short'>
-            <h3>{experiment.title}</h3>
+          <div className='experiment-short' key={index}>
+            <a href={`/experiment/${experiment.id}`} ><h3>{experiment.title}</h3></a>
             <p>Created at: {experiment.created_at}</p>
             <p>Updated at: {experiment.updated_at}</p>
             <p>{experiment.description}</p>
