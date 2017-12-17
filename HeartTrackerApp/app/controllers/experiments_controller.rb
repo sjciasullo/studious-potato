@@ -18,6 +18,15 @@ class ExperimentsController < ApiController
 
   def create
     experiment = Experiment.new(experiment_params)
+    experiment.user = current_user
+    if experiment.save
+      render json: {
+        message: 'ok',
+        experiment: experiment,
+      }
+    else
+      render json: {message: 'Could not create experiment. You may have used title before'}
+    end
   end
 
   def update
