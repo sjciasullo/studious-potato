@@ -147,9 +147,10 @@ class UserController extends Component {
     })
   }
 
+  //could modularize submitExperiment to submit an edit
   submitEditExperiment(e) {
     e.preventDefault();
-    fetch(`/experiments/${this.state.experimentShow.id}`, {
+    fetch(`/experiments/${this.state.experimentSingle.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -30,6 +30,17 @@ class ExperimentsController < ApiController
   end
 
   def update
+    experiment = Experiment.find(params[:id])
+    if experiment.update(experiment_params)
+      render json: {
+        message: 'ok',
+        experiment: experiment,
+      }
+    else
+      render json: {
+        message: 'Failed. Could not edit'
+      }
+    end
   end
 
   def destroy
