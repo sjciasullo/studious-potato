@@ -21,9 +21,12 @@ class ExperimentSingle extends Component{
       trials: null, 
       trialView: false,
       selectedTrial: null,
+      trialNotes: '',
     }
 
     this.createTrial = this.createTrial.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submitTrialNotes = this.submitTrialNotes.bind(this);
 
   }
 
@@ -68,16 +71,32 @@ class ExperimentSingle extends Component{
     }).then(res => res.json())
     .then(json => {
       this.getSingleExperiment(this.state.id);
+      return json
     }).catch(err => {
       console.log(err);
     })
   }
 
   trialView(id) {
+    const notes = this.state.trials[id].notes
     this.setState({
       trialView: true,
       selectedTrial: id,
+      trialNotes: notes
     })
+  }
+
+  handleChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [key]: value
+    })
+  }
+
+  submitTrialNotes(e) {
+    e.preventDefault();
+    console.log(this.state.trialNotes);
   }
 
   componentDidMount(){
@@ -110,7 +129,7 @@ class ExperimentSingle extends Component{
               
               
               <div className='trial-list'>
-                <h4>Trials</h4>
+                {!this.state.trialView && <h4>Trials</h4>}
                 <button onClick={this.createTrial}>New Trial</button>
                 {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
                   return (
@@ -125,9 +144,16 @@ class ExperimentSingle extends Component{
               {this.state.trialView && (
                 <div className='trial-container'>
                   <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
-                  <p>Last Modified: {this.state.trials[this.state.selectedTrial].last_modified}</p>
+                  <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
                   <div>this will be a graph of the data</div>
                   <div>this will be a list of the datapoints</div>
+                  <div>
+                    Notes:
+                    <form onSubmit={this.submitTrialNotes}>
+                      <input type='text' name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}/>
+                      <input type='submit' value='Save' />
+                    </form>
+                  </div>
                 </div>
               )}
     
