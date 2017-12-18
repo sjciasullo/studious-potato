@@ -13,6 +13,7 @@ class ExperimentSingle extends Component{
     super(props);
     this.state={
       apiLoaded: false,
+      message: null,
       id: null,
       title: null,
       created_at: null,

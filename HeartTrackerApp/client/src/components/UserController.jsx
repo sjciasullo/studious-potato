@@ -14,8 +14,6 @@ class UserController extends Component {
     this.state = {
       apiLoaded: false,
       experiments: [],
-      experimentSingle: null,
-      singleTrials: null,
       message: null,
 
       //redirecter
@@ -164,9 +162,9 @@ class UserController extends Component {
       case 'dashboard':
         this.getUserExperiments();
         break;
+      
+      //redundant but keeping for brevity, history of experimentSingle, functionality
       case 'experimentSingle':
-        // this.getSingleExperiment(this.props.experimentId);
-        // moved to experimentSingle
         this.setState({
           apiLoaded: true,
         })
@@ -209,9 +207,6 @@ class UserController extends Component {
         } else {
           return <ExperimentSingle 
                     id={this.props.experimentId}
-                    experiment={this.state.experimentSingle}
-                    trials={this.state.singleTrials}
-                    message={this.state.message}
                     deleteExperiment={this.deleteExperiment}
                     editExperiment={this.editExperiment}
                   />
@@ -239,7 +234,7 @@ class UserController extends Component {
           </div>
           
         ) : (
-          <p>loading</p>
+          <p>Loading. . .</p>
         )}
       </div>
     )
