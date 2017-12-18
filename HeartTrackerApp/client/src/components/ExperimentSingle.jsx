@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auth from '../modules/Auth'
 
 class ExperimentSingle extends Component{
   /*
@@ -11,13 +12,39 @@ class ExperimentSingle extends Component{
   constructor(props) {
     super(props);
     this.state={
+      id: props.experiment.id,
       title: props.experiment.title,
       created_at: props.experiment.created_at,
       updated_at: props.experiment.updated_at,
       description: props.experiment.description,
-      trials: props.experiment.trials,
-      data: props.experiment.data,
+      trials: props.trials,
+      // data: props.experiment.data,
     }
+
+    this.createTrial = this.createTrial.bind(this);
+
+  }
+
+  createTrial(){
+    fetch(`/experiments/${this.state.id}/trials`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        trial: {
+          notes: '',
+        }
+      })
+    }).then(res => res.json())
+    .then(json => {
+      console.log(json);
+      this.setState({
+
+      })
+    })
   }
 
   render(){
@@ -36,10 +63,12 @@ class ExperimentSingle extends Component{
             <div>put a graph of data here</div>
             
             <div className='trial-list'>
-              {this.trials.map((trial, index) => {
+              <h4>Trials</h4>
+              <button onClick={this.createTrial}>New Trial</button>
+              {this.state.trials.map((trial, index) => {
                 return (
-                  <div className='trial-short'>
-                    {trial.trial_num} Last Modified: {trial.updated_at}
+                  <div className='trial-short' key={index}>
+                    Trial {trial.trial_num} Last Modified: {trial.updated_at}
                   </div>
                 )
               })}

@@ -4,6 +4,9 @@ class ExperimentsController < ApiController
   def index
     @user = current_user
     experiments = Experiment.all.where(user_id: @user.id)
+    # experiments.each do |experiment|
+      # add data and trials to index
+    # end
     render json: { experiments: experiments}
   end
 
@@ -12,7 +15,11 @@ class ExperimentsController < ApiController
     if experiment.user_id != current_user.id
       render json: {message: 'Not your experiment!'} 
     else
-      render json: { experiment: Experiment.find(params[:id]), message: 'ok'}
+      render json: { 
+        experiment: experiment, 
+        message: 'ok',
+        trials: experiment.trials
+      }
     end
   end
 

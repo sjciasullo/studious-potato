@@ -15,6 +15,7 @@ class UserController extends Component {
       apiLoaded: false,
       experiments: [],
       experimentSingle: null,
+      singleTrials: null,
       message: null,
 
       //redirecter
@@ -66,6 +67,7 @@ class UserController extends Component {
       this.setState({
         apiLoaded: true,
         experimentSingle: json.experiment,
+        singleTrials: json.trials,
         message: json.message,
       })
     }).catch( err => {
@@ -223,13 +225,13 @@ class UserController extends Component {
                   />
         } else {
           return <ExperimentSingle 
-                    experiment={this.state.experimentSingle} 
+                    experiment={this.state.experimentSingle}
+                    trials={this.state.singleTrials}
                     message={this.state.message}
                     deleteExperiment={this.deleteExperiment}
                     editExperiment={this.editExperiment}
                   />
         }
-       
       case 'experimentCreate':
         return <ExperimentForm 
                   experimentTitle={this.state.experimentTitle}
@@ -238,8 +240,6 @@ class UserController extends Component {
                   submitExperiment={this.submitExperiment}
                   edit={false}
                 />
-      case 'experimentCreate':
-        
       default:
         return <p>An error has occurred! Please contact the developer, you hacker</p>
     }
