@@ -112,14 +112,28 @@ class ExperimentSingle extends Component{
       })
     }).then( res => res.json())
     .then( json => {
-      
+      this.getTrials();
     }).catch(err => {
         console.log(err);
     })
   }
 
   getTrials(){
-    
+    fetch(`/experiments/${this.state.id}/trials`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+    }).then(res => res.json())
+    .then( json => {
+      this.setState({
+        trials: json.trials,
+      })
+    }).catch( err => {
+      console.log(err);
+    })
   }
 
   componentDidMount(){
