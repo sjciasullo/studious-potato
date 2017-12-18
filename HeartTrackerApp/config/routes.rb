@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get "/profile" => "users#profile"
   resources :users, except: [:index, :delete]
   resources :experiments do 
-    resources :trials, only: [:create, :update]
+    resources :trials, only: [:index, :create, :update]
   end
 end

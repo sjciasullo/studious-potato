@@ -97,6 +97,29 @@ class ExperimentSingle extends Component{
   submitTrialNotes(e) {
     e.preventDefault();
     console.log(this.state.trialNotes);
+    const trial_id = this.state.trials[this.state.selectedTrial].id
+    fetch(`/experiments/${this.state.id}/trials/${trial_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        trial: {
+          notes: this.state.trialNotes,
+        }
+      })
+    }).then( res => res.json())
+    .then( json => {
+      
+    }).catch(err => {
+        console.log(err);
+    })
+  }
+
+  getTrials(){
+    
   }
 
   componentDidMount(){

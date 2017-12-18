@@ -1,6 +1,12 @@
 class TrialsController < ApiController
   before_action :require_login
 
+  def index
+    render json: {
+      trials: Trial.all.where(experiment_id: params[:experiment_id])
+    }
+  end
+
   def create
     trial = Trial.new(trial_params)
     trial.experiment_id = params[:experiment_id]
