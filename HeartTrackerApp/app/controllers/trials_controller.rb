@@ -3,7 +3,7 @@ class TrialsController < ApiController
 
   def create
     trial = Trial.new(trial_params)
-    trial.experiment = params[:experiment_id]
+    trial.experiment_id = params[:experiment_id]
     if trial.save
       render json: {
         message: 'ok',
@@ -21,6 +21,6 @@ class TrialsController < ApiController
 
   private
   def trial_params
-    params.require(:trial).permit(:description)
+    params.require(:trial).permit(:notes)
   end
 end

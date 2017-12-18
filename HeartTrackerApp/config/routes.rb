@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
   get "/profile" => "users#profile"
   resources :users, except: [:index, :delete]
-  resources :experiments
+  resources :experiments do 
+    resources :trials, only: [:create, :update]
+  end
 end
