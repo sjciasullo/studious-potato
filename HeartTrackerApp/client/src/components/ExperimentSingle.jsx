@@ -86,7 +86,10 @@ class ExperimentSingle extends Component{
             <div>
               <h3>{this.state.title}</h3>
               <button onClick={() => this.props.deleteExperiment(this.state.id)}>Delete Experiment</button>
-              <button onClick={this.props.editExperiment}>Edit Experiment</button>
+              <button 
+                onClick={() => this.props.editExperiment(this.state.title, this.state.description, this.state.id)}>
+                Edit Experiment
+              </button>
               <p>{this.state.created_at}</p>
               <p>{this.state.updated_at}</p>
               <p>{this.state.description}</p>

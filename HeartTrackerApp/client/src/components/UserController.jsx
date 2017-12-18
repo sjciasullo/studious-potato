@@ -23,6 +23,7 @@ class UserController extends Component {
       // for forms
       experimentTitle: '',
       experimentDescription: '',
+      experimentId: null,
       edit: false,
       //experimentFlag: true,
     }
@@ -110,10 +111,11 @@ class UserController extends Component {
   }
 
   //switch to edit page from show
-  editExperiment(){
+  editExperiment(title, description, id){
     this.setState({
-      experimentTitle: this.state.experimentSingle.title,
-      experimentDescription: this.state.experimentSingle.description,
+      experimentTitle: title,
+      experimentDescription: description,
+      experimentId: id,
       edit: true
     })
   }
@@ -129,7 +131,7 @@ class UserController extends Component {
   //could modularize submitExperiment to submit an edit
   submitEditExperiment(e) {
     e.preventDefault();
-    fetch(`/experiments/${this.state.experimentSingle.id}`, {
+    fetch(`/experiments/${this.state.experimentId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
