@@ -96,7 +96,6 @@ class ExperimentSingle extends Component{
 
   submitTrialNotes(e) {
     e.preventDefault();
-    console.log(this.state.trialNotes);
     const trial_id = this.state.trials[this.state.selectedTrial].id
     fetch(`/experiments/${this.state.id}/trials/${trial_id}`, {
       method: 'PUT',
