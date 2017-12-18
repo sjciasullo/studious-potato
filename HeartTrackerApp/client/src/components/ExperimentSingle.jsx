@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Auth from '../modules/Auth'
 
 class ExperimentSingle extends Component{
-  /*
+  /* prop list
   const experiment = props.experiment;
   const message = props.message;
   const deleteExperiment = props.deleteExperiment;
@@ -64,18 +64,6 @@ class ExperimentSingle extends Component{
       })
     }).then(res => res.json())
     .then(json => {
-      console.log(json);
-      /*
-      this.setState( (prevState) => {
-        return {
-          trials: prevState.trials.push(json.trial)
-        }
-      })
-      */
-      // const trialsArr = this.state.trials.push(json.trial);
-      // this.setState({
-      //   trials: trialsArr
-      // })
       this.getSingleExperiment(this.state.id);
     }).catch(err => {
       console.log(err);
