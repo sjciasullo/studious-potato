@@ -1,8 +1,9 @@
 class Trial < ApplicationRecord
   belongs_to :experiment
 
-  # before create we want to increment
+  # before create we want to increment current_trial of experiment and set that to trial_num
   before_create :set_trial_num
+  
   private
   def set_trial_num
     self.experiment.current_trial += 1
