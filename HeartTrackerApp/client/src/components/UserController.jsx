@@ -55,26 +55,6 @@ class UserController extends Component {
     })
   }
 
-  getSingleExperiment(id) {
-    fetch(`/experiments/${id}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Token ${Auth.getToken()}`,
-        token: Auth.getToken(),
-      }
-    }).then( res => res.json())
-    .then( json => {
-      this.setState({
-        apiLoaded: true,
-        experimentSingle: json.experiment,
-        singleTrials: json.trials,
-        message: json.message,
-      })
-    }).catch( err => {
-      console.log(err);
-    })
-  }
-
   deleteExperiment(id) {
     fetch(`/experiments/${id}`, {
       method: 'DELETE',
@@ -88,7 +68,6 @@ class UserController extends Component {
         fireRedirect: true,
         redirectPath: '/dashboard',
       });
-      console.log(json);
     }).catch( err => {
       console.log(err);
     })
@@ -186,7 +165,11 @@ class UserController extends Component {
         this.getUserExperiments();
         break;
       case 'experimentSingle':
-        this.getSingleExperiment(this.props.experimentId);
+        // this.getSingleExperiment(this.props.experimentId);
+        // moved to experimentSingle
+        this.setState({
+          apiLoaded: true,
+        })
         break;
       default:
         //set loaded to true because no data needed
@@ -225,6 +208,7 @@ class UserController extends Component {
                   />
         } else {
           return <ExperimentSingle 
+                    id={this.props.experimentId}
                     experiment={this.state.experimentSingle}
                     trials={this.state.singleTrials}
                     message={this.state.message}
