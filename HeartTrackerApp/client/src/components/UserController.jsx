@@ -167,8 +167,8 @@ class UserController extends Component {
     .then( json => {
       this.setState({
         fireRedirect: true,
-        redirectRoute: `/experiment/${json.experiment.id}`,
-        edit: false
+        redirectRoute: `/dashboard`,
+        edit: false,        
       })
     }).catch( err => {
       console.log(err);
