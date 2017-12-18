@@ -1,5 +1,6 @@
 class Trial < ApplicationRecord
   belongs_to :experiment
+  has_many :datapoints
 
   # before create we want to increment current_trial of experiment and set that to trial_num
   before_create :set_trial_num
