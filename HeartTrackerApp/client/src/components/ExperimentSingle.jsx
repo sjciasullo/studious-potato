@@ -4,6 +4,7 @@ const ExperimentSingle= function (props) {
   const experiment = props.experiment;
   const message = props.message;
   const deleteExperiment = props.deleteExperiment;
+  const editExperiment = props.editExperiment;
   return(
     <div>
       {message === 'Not your experiment!' ? (
@@ -16,6 +17,8 @@ const ExperimentSingle= function (props) {
           <p>{experiment.description}</p>
           <p>do something with data here</p>
           <button onClick={() => deleteExperiment(experiment.id)}>Delete Experiment</button>
+          <button onClick={editExperiment}>Edit Experiment</button>
+
         </div>
         
       )}

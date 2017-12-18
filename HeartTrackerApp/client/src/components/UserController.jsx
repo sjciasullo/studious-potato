@@ -24,11 +24,15 @@ class UserController extends Component {
       // for forms
       experimentTitle: '',
       experimentDescription: '',
+      edit: false,
       //experimentFlag: true,
     }
     this.handleChange = this.handleChange.bind(this);
     this.submitExperiment = this.submitExperiment.bind(this);
     this.deleteExperiment = this.deleteExperiment.bind(this);
+    this.submitEditExperiment = this.submitEditExperiment.bind(this);
+    this.editExperiment = this.editExperiment.bind(this);
+    this.cancelEditExperiment = this.cancelEditExperiment.bind(this);
   }
 
   // ----- possible user fetches -----
@@ -126,6 +130,50 @@ class UserController extends Component {
     })
   }
 
+  //switch to edit page from show
+  editExperiment(){
+    this.setState({
+      experimentTitle: this.state.experimentSingle.title,
+      experimentDescription: this.state.experimentSingle.description,
+      edit: true
+    })
+  }
+
+  cancelEditExperiment(){
+    this.setState({
+      experimentTitle: '',
+      experimentDescription: '',
+      edit: false,
+    })
+  }
+
+  submitEditExperiment(e) {
+    e.preventDefault();
+    fetch(`/experiments/${this.state.experimentShow.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        experiment: {
+          title: this.state.experimentTitle,
+          description: this.state.experimentDescription,
+        }
+      })
+    }).then( res => res.json())
+    .then( json => {
+      this.setState({
+        fireRedirect: true,
+        redirectRoute: `/experiment/${json.experiment.id}`,
+        edit: false
+      })
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
   // ----- end form functions -----
 
   // 
@@ -163,18 +211,34 @@ class UserController extends Component {
                   deleteExperiment={this.deleteExperiment}
                 />
       case 'experimentSingle':
-        return <ExperimentSingle 
-                  experiment={this.state.experimentSingle} 
-                  message={this.state.message}
-                  deleteExperiment={this.deleteExperiment}
-                />
+        if(this.state.edit) {
+          return <ExperimentForm
+                    experimentTitle={this.state.experimentTitle}
+                    experimentDescription={this.state.experimentDescription}
+                    handleChange={this.handleChange}
+                    submitExperiment={this.submitEditExperiment}
+                    edit={true}
+                    cancelEditExperiment={this.cancelEditExperiment}
+                  />
+        } else {
+          return <ExperimentSingle 
+                    experiment={this.state.experimentSingle} 
+                    message={this.state.message}
+                    deleteExperiment={this.deleteExperiment}
+                    editExperiment={this.editExperiment}
+                  />
+        }
+       
       case 'experimentCreate':
         return <ExperimentForm 
                   experimentTitle={this.state.experimentTitle}
                   experimentDescription={this.state.experimentDescription}
                   handleChange={this.handleChange}
                   submitExperiment={this.submitExperiment}
+                  edit={false}
                 />
+      case 'experimentCreate':
+        
       default:
         return <p>An error has occurred! Please contact the developer, you hacker</p>
     }
