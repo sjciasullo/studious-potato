@@ -71,7 +71,7 @@ class UserController extends Component {
 
   deleteExperiment(id) {
     fetch(`/experiments/${id}`, {
-      method: 'GET',
+      method: 'DELETE',
       headers: {
         'Authorization': `Token ${Auth.getToken()}`,
         token: Auth.getToken(),
@@ -81,7 +81,10 @@ class UserController extends Component {
       this.setState({
         fireRedirect: true,
         redirectPath: '/dashboard',
-      })
+      });
+      console.log(json);
+    }).catch( err => {
+      console.log(err);
     })
   }
 

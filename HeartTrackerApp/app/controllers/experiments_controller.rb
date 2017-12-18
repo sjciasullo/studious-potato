@@ -34,6 +34,7 @@ class ExperimentsController < ApiController
 
   def destroy
     Experiment.delete(params[:id])
+    render json: {message: 'ok'}
   end
 
   private
