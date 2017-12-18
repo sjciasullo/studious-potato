@@ -3,8 +3,6 @@ import Auth from '../modules/Auth'
 
 class ExperimentSingle extends Component{
   /* prop list
-  const experiment = props.experiment;
-  const message = props.message;
   const deleteExperiment = props.deleteExperiment;
   const editExperiment = props.editExperiment;
   */
@@ -20,7 +18,9 @@ class ExperimentSingle extends Component{
       updated_at: null,
       description: null,
       current_trial: null,
-      trials: null   // data: props.experiment.data,
+      trials: null, 
+      trialView: false,
+      selectedTrial: null,
     }
 
     this.createTrial = this.createTrial.bind(this);
@@ -73,6 +73,13 @@ class ExperimentSingle extends Component{
     })
   }
 
+  trialView(id) {
+    this.setState({
+      trialView: true,
+      selectedTrial: id,
+    })
+  }
+
   componentDidMount(){
     this.getSingleExperiment(this.props.id);
   }
@@ -82,21 +89,25 @@ class ExperimentSingle extends Component{
       <div>
         {this.state.apiLoaded ? (
           <div>
-          {this.state.message === 'Not your experiment!' ? (
-            <p>Not your experiment!</p>
-          ) : (
+            
+          {this.state.message !== 'Not your experiment!' && (
             <div>
-              <h3>{this.state.title}</h3>
-              <button onClick={() => this.props.deleteExperiment(this.state.id)}>Delete Experiment</button>
-              <button 
-                onClick={() => this.props.editExperiment(this.state.title, this.state.description, this.state.id)}>
-                Edit Experiment
-              </button>
-              <p>{this.state.created_at}</p>
-              <p>{this.state.updated_at}</p>
-              <p>{this.state.description}</p>
-              <p>current trial: {this.state.current_trial}</p>
-              <div>put a graph of data here</div>
+              <a href={`/experiment/${this.state.id}`}><h3>{this.state.title}</h3></a>
+              {!this.state.trialView && (
+                <div className='experiment-info-container'>
+                  <button onClick={() => this.props.deleteExperiment(this.state.id)}>Delete Experiment</button>
+                  <button 
+                    onClick={() => this.props.editExperiment(this.state.title, this.state.description, this.state.id)}>
+                    Edit Experiment
+                  </button>
+                  <p>{this.state.created_at}</p>
+                  <p>{this.state.updated_at}</p>
+                  <p>{this.state.description}</p>
+                  <p>current trial: {this.state.current_trial}</p>
+                  <div>put a graph of data here</div>
+                </div>
+              )}
+              
               
               <div className='trial-list'>
                 <h4>Trials</h4>
@@ -104,11 +115,21 @@ class ExperimentSingle extends Component{
                 {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
                   return (
                     <div className='trial-short' key={index}>
-                      Trial {trial.trial_num} Last Modified: {trial.updated_at}
+                      <span onClick={()=>this.trialView(index)}>Trial {trial.trial_num}</span> 
+                      Last Modified: {trial.updated_at}
                     </div>
                   )
                 })}
               </div>
+
+              {this.state.trialView && (
+                <div className='trial-container'>
+                  <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
+                  <p>Last Modified: {this.state.trials[this.state.selectedTrial].last_modified}</p>
+                  <div>this will be a graph of the data</div>
+                  <div>this will be a list of the datapoints</div>
+                </div>
+              )}
     
             </div>
             
