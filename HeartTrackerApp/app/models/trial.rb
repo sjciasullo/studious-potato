@@ -6,9 +6,9 @@ class Trial < ApplicationRecord
   private
   def set_trial_num
     p self.experiment
-    self.experiment.current_trial += 1
+    self.experiment.current_trial = self.experiment.current_trial + 1
     p self.experiment
-    self.experiment.current_trial.save
+    self.experiment.save
     self.trial_num = self.experiment.current_trial
   end
 end
