@@ -70,7 +70,7 @@ class UserController extends Component {
   }
 
   deleteExperiment(id) {
-    fetch(`/experiment/${id}`, {
+    fetch(`/experiments/${id}`, {
       method: 'GET',
       headers: {
         'Authorization': `Token ${Auth.getToken()}`,
