@@ -3,6 +3,7 @@ import React from 'react';
 const ExperimentSingle= function (props) {
   const experiment = props.experiment;
   const message = props.message;
+  const deleteExperiment = props.deleteExperiment;
   return(
     <div>
       {message === 'Not your experiment!' ? (
@@ -14,6 +15,7 @@ const ExperimentSingle= function (props) {
           <p>{experiment.updated_at}</p>
           <p>{experiment.description}</p>
           <p>do something with data here</p>
+          <button onClick={() => deleteExperiment(experiment.id)}>Delete Experiment</button>
         </div>
         
       )}

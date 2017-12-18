@@ -70,7 +70,7 @@ class UserController extends Component {
   }
 
   deleteExperiment(id) {
-    fetch(`/experiments/${id}`, {
+    fetch(`/experiment/${id}`, {
       method: 'GET',
       headers: {
         'Authorization': `Token ${Auth.getToken()}`,
@@ -163,6 +163,7 @@ class UserController extends Component {
         return <ExperimentSingle 
                   experiment={this.state.experimentSingle} 
                   message={this.state.message}
+                  deleteExperiment={this.deleteExperiment}
                 />
       case 'experimentCreate':
         return <ExperimentForm 
