@@ -41,9 +41,19 @@ class ExperimentSingle extends Component{
     }).then(res => res.json())
     .then(json => {
       console.log(json);
-      this.setState({
-
+      /*
+      this.setState( (prevState) => {
+        return {
+          trials: prevState.trials.push(json.trial)
+        }
       })
+      */
+      const trialsArr = this.state.trials.push(json.trial);
+      this.setState({
+        trials: trialsArr
+      })
+    }).catch(err => {
+      console.log(err);
     })
   }
 
@@ -65,7 +75,7 @@ class ExperimentSingle extends Component{
             <div className='trial-list'>
               <h4>Trials</h4>
               <button onClick={this.createTrial}>New Trial</button>
-              {this.state.trials.map((trial, index) => {
+              {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
                 return (
                   <div className='trial-short' key={index}>
                     Trial {trial.trial_num} Last Modified: {trial.updated_at}
