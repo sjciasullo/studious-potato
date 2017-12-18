@@ -33,6 +33,7 @@ class ExperimentsController < ApiController
   end
 
   def destroy
+    Experiment.delete(params[:id])
   end
 
   private
