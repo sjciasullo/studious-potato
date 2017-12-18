@@ -19,6 +19,7 @@ class ExperimentSingle extends Component{
       created_at: null,
       updated_at: null,
       description: null,
+      current_trial: null,
       trials: null   // data: props.experiment.data,
     }
 
@@ -42,6 +43,7 @@ class ExperimentSingle extends Component{
         created_at: json.experiment.created_at,
         updated_at: json.experiment.updated_at,
         description: json.experiment.description,
+        current_trial: json.experiment.current_trial,
         trials: json.trials,
         message: json.message,
       })
@@ -93,6 +95,7 @@ class ExperimentSingle extends Component{
               <p>{this.state.created_at}</p>
               <p>{this.state.updated_at}</p>
               <p>{this.state.description}</p>
+              <p>current trial: {this.state.current_trial}</p>
               <div>put a graph of data here</div>
               
               <div className='trial-list'>
