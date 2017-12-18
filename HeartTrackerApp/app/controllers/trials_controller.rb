@@ -17,6 +17,17 @@ class TrialsController < ApiController
   end
 
   def update
+    trial = Trial.find(params[:id])
+    if trial.update(trial_params)
+      render json: {
+        message: 'ok',
+        trial: trial
+      }
+    else
+      render json: {
+        message: 'Failed. Could not edit trial'
+      }
+    end
   end
 
   private
