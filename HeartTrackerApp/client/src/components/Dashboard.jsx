@@ -3,6 +3,7 @@ import React from 'react';
 const Dashboard = function(props) {
   // prop list
   const experiments = props.experiments;
+  const deleteExperiment = props.deleteExperiment;
 
   return(
     <div className='dash_container'>
@@ -15,6 +16,7 @@ const Dashboard = function(props) {
             <p>Created at: {experiment.created_at}</p>
             <p>Updated at: {experiment.updated_at}</p>
             <p>{experiment.description}</p>
+            <button onClick={() => deleteExperiment(experiment.id)}>Delete Experiment</button>
           </div>
         )
       })}

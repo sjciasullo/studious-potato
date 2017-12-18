@@ -28,6 +28,7 @@ class UserController extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.submitExperiment = this.submitExperiment.bind(this);
+    this.deleteExperiment = this.deleteExperiment.bind(this);
   }
 
   // ----- possible user fetches -----
@@ -65,6 +66,22 @@ class UserController extends Component {
       })
     }).catch( err => {
       console.log(err);
+    })
+  }
+
+  deleteExperiment(id) {
+    fetch(`/experiments/${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then( res => res.json())
+    .then( json => {
+      this.setState({
+        fireRedirect: true,
+        redirectPath: '/dashboard',
+      })
     })
   }
 
@@ -138,7 +155,10 @@ class UserController extends Component {
   decideRender(){
     switch(this.props.page) {
       case 'dashboard':
-        return <Dashboard experiments={this.state.experiments} />
+        return <Dashboard 
+                  experiments={this.state.experiments} 
+                  deleteExperiment={this.deleteExperiment}
+                />
       case 'experimentSingle':
         return <ExperimentSingle 
                   experiment={this.state.experimentSingle} 
@@ -150,7 +170,7 @@ class UserController extends Component {
                   experimentDescription={this.state.experimentDescription}
                   handleChange={this.handleChange}
                   submitExperiment={this.submitExperiment}
-               />
+                />
       default:
         return <p>An error has occurred! Please contact the developer, you hacker</p>
     }
