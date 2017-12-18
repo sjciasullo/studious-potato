@@ -8,7 +8,7 @@ class Trial < ApplicationRecord
     p self.experiment
     self.experiment.current_trial = self.experiment.current_trial + 1
     p self.experiment
-    self.experiment.save
+    # self.experiment.save
     self.trial_num = self.experiment.current_trial
   end
 end
