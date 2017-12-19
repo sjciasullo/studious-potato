@@ -346,9 +346,10 @@ class ExperimentSingle extends Component{
 
                   </div>
                   <div>
-                    Notes:
+                    Trial Notes:
                     <form onSubmit={this.submitTrialNotes}>
-                      <input type='text' name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}/>
+                      {/* <input type='text-area' name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}/> */}
+                      <textarea name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}></textarea>
                       <input type='submit' value='Save' />
                     </form>
                   </div>
