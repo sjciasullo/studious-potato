@@ -24,12 +24,16 @@ class ExperimentSingle extends Component{
       trialNotes: '',
       trialData: null,
       newDataHeartrate: '',
+      dataEditIndex: null,
+      editHeartrate: '',
     }
 
     this.createTrial = this.createTrial.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitTrialNotes = this.submitTrialNotes.bind(this);
     this.submitData = this.submitData.bind(this);
+    this.editHeartrateForm = this.editHeartrateForm.bind(this);
+    this.submitEditData = this.submitEditData.bind(this);
   }
 
   getSingleExperiment(id) {
@@ -185,6 +189,45 @@ class ExperimentSingle extends Component{
     this.getSingleExperiment(this.props.id);
   }
 
+  /*strategy for update a single point based on click
+
+  -- onClick setState of dataEditIndex to the index?
+  -- if dataEditIndex === index in the map, render a form instead
+  -- on the edit submit, save it and set dataEditIndex back to null
+  */
+
+  editHeartrateForm(data_index){
+    const heartrate = this.state.triallData[index].heartrate;
+    this.setState({
+      dataEditIndex: data_index,
+      editHeartrate: heartrate,
+    })
+  }
+
+  submitEditData(e){
+    e.preventDefault();
+    const trial_id = this.state.trials[this.state.current_trial].id
+    const data_id = this.state.trialData[this.state.dataEditIndex]
+    fetch(`/trials/${trial_id}/data/${data_id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        datapoint: {
+          heartrate: this.state.editHeartrate,
+        }
+      })
+    }).then( res => res.json())
+    .then( json => {
+      this.getTrialData(trial_id);
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
   render(){
     return(
       <div>
@@ -245,11 +288,32 @@ class ExperimentSingle extends Component{
                     {this.state.trialData !== null && ( 
                       <div className="datapoints-list">
                         {this.state.trialData.map((data, index) => {
-                          return (
-                            <div className='data-list-item' key={index}>
-                              Heartrate: {data.heartrate} BPM
-                            </div>
-                          )
+                          if(this.state.dataEditIndex === index) {
+                            return (
+                              <form onSubmit={this.submitEditData}>
+                                <label>
+                                  Heartrate:
+                                  <input 
+                                    type='number'
+                                    name='editHeartrate'
+                                    onChange={this.handleChange}
+                                    value={this.state.newDataHeartrate}
+                                  />
+                                  BPM
+                                </label>
+                                <input type='submit' value='Save'/>
+                              </form>
+                            )
+                          } else {
+                            return (
+                              <div onClick={() => this.editHeartrateForm(index)} 
+                              className='data-list-item' key={index}
+                              >
+                                Heartrate: {data.heartrate} BPM
+                              </div>
+                            )
+                          }
+                          
                         })}
                       </div> 
                     )}
