@@ -22,6 +22,7 @@ class ExperimentSingle extends Component{
       trialView: false,
       selectedTrial: null,
       trialNotes: '',
+      trialData: null,
     }
 
     this.createTrial = this.createTrial.bind(this);
@@ -77,8 +78,26 @@ class ExperimentSingle extends Component{
     })
   }
 
+  getTrialData(id) {
+    fetch(`/trials/${id}/data`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      }
+    }).then( res => res.json())
+    .then( json => {
+      this.setState({
+        trialData: json.data
+      })
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   trialView(id) {
     const notes = this.state.trials[id].notes
+    this.getTrialData(this.state.trials[id].id);
     this.setState({
       trialView: true,
       selectedTrial: id,
@@ -182,7 +201,21 @@ class ExperimentSingle extends Component{
                   <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
                   <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
                   <div>this will be a graph of the data</div>
-                  <div>this will be a list of the datapoints</div>
+                  {this.state.trialData !== null && (
+                    <div>
+                      <h2>Datapoints list</h2> 
+                      {this.state.trialData.map((data, index) => {
+                        return (
+                          <div key={index}>
+                            Heartrate: {data.heartrate}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                  <div>
+
+                  </div>
                   <div>
                     Notes:
                     <form onSubmit={this.submitTrialNotes}>
