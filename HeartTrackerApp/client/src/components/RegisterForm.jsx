@@ -26,7 +26,7 @@ const RegisterForm = function(props) {
         <input name="email" type='text' onChange={handleChange} 
           placeholder="Email" value={email}/>
           <br />
-        <input type='submit' value="Register"/>
+        <input className='login-submit' type='submit' value="Register"/>
       </form>
       <p>Already have an account? <span className='changeform' onClick={toggleForm}>Login</span></p>
     </div>
