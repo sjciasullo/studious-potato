@@ -197,7 +197,7 @@ class ExperimentSingle extends Component{
   */
 
   editHeartrateForm(data_index){
-    const heartrate = this.state.triallData[index].heartrate;
+    const heartrate = this.state.trialData[data_index].heartrate;
     this.setState({
       dataEditIndex: data_index,
       editHeartrate: heartrate,
@@ -290,14 +290,14 @@ class ExperimentSingle extends Component{
                         {this.state.trialData.map((data, index) => {
                           if(this.state.dataEditIndex === index) {
                             return (
-                              <form onSubmit={this.submitEditData}>
+                              <form onSubmit={this.submitEditData} key={index}>
                                 <label>
                                   Heartrate:
                                   <input 
                                     type='number'
                                     name='editHeartrate'
                                     onChange={this.handleChange}
-                                    value={this.state.newDataHeartrate}
+                                    value={this.state.editHeartrate}
                                   />
                                   BPM
                                 </label>
