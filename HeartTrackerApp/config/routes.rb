@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   resources :experiments do 
     resources :trials, only: [:index, :create, :update]
   end
+
+  get "trials/:trial_id/data" => "datapoints#index"
+  post "trials/:trial_id/data" => "datapoints#create"
+  put "trials/:trial_id/data/:id" => "datapoints#update"
+  delete "trials/:trial_id/data/:id" => "datapoints#destroy"
+
 end
