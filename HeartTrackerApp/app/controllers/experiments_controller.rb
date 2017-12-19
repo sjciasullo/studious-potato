@@ -4,10 +4,21 @@ class ExperimentsController < ApiController
   def index
     @user = current_user
     experiments = Experiment.all.where(user_id: @user.id)
-    # experiments.each do |experiment|
-      # add data and trials to index
-    # end
-    render json: { experiments: experiments}
+    datesFormatted = []
+    experiments.each do |experiment|
+      date = {
+        id: experiment.id,
+        title: experiment.title,
+        description: experiment.description,
+        current_trial: experiment.current_trial,
+        warning_flag: experiment.warning_flag,
+        user_id: experiment.user_id,
+        created_at: experiment.created_at.to_s(:long),
+        updated_at: experiment.updated_at.to_s(:long)
+      }
+      datesFormatted.push(date)
+    end
+    render json: { experiments: datesFormatted}
   end
 
   def show
@@ -15,10 +26,33 @@ class ExperimentsController < ApiController
     if experiment.user_id != current_user.id
       render json: {message: 'Not your experiment!'} 
     else
+      formattedExperiment = {
+        id: experiment.id,
+        title: experiment.title,
+        description: experiment.description,
+        current_trial: experiment.current_trial,
+        warning_flag: experiment.warning_flag,
+        user_id: experiment.user_id,
+        created_at: experiment.created_at.to_s(:long),
+        updated_at: experiment.updated_at.to_s(:long)
+      }
+      trials = experiment.trials
+      formattedTrials = []
+      trials.each do |trial|
+        formatted = {
+          id: trial.id,
+          trial_num: trial.trial_num,
+          notes: trial.notes,
+          experiment_id: trial.experiment_id,
+          created_at: trial.created_at.to_s(:long),
+          updated_at: trial.updated_at.to_s(:long),
+        }
+        formattedTrials.push(formatted)
+      end
       render json: { 
-        experiment: experiment, 
+        experiment: formattedExperiment, 
         message: 'ok',
-        trials: experiment.trials
+        trials: formattedTrials,
       }
     end
   end
