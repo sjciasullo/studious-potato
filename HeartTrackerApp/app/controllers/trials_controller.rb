@@ -7,6 +7,14 @@ class TrialsController < ApiController
     }
   end
 
+  def show
+    trial = Trial.find(params[:id])
+    render json: {
+      trial: trial,
+      data: trial.datapoints
+    }
+  end
+
   def create
     trial = Trial.new(trial_params)
     trial.experiment_id = params[:experiment_id]
