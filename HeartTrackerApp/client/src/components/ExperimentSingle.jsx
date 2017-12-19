@@ -34,6 +34,7 @@ class ExperimentSingle extends Component{
     this.submitData = this.submitData.bind(this);
     this.editHeartrateForm = this.editHeartrateForm.bind(this);
     this.submitEditData = this.submitEditData.bind(this);
+    this.deleteDatapoint = this.deleteDatapoint.bind(this);
   }
 
   getSingleExperiment(id) {
@@ -228,6 +229,22 @@ class ExperimentSingle extends Component{
       })
       this.getTrialData(trial_id);
     }).catch( err => {
+      console.log(err);
+    })
+  }
+
+  deleteDatapoint(dataId){
+    const trial_id = this.state.trials[this.state.selectedTrial].id
+    fetch(`/trials/${trial_id}/data/${dataId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+    }).then( res => res.json())
+    .then( json => {
+      this.getTrialData(trial_id);
+    }).catch ( err => {
       console.log(err);
     })
   }
