@@ -9,6 +9,8 @@ button:focus {
   text-align: center;
 }
 
+/* home page */
+
 .changeform {
   color: blue;
 }
@@ -17,18 +19,7 @@ button:focus {
   color: red;
 }
 
-header {
-  display: flex;
-  justify-content: space-between
-}
 
-.user-nav{
-  display: flex;
-  min-width: 25vw;
-  justify-content: space-around;
-}
-
-/* home page */
 
 .login-form input:not(.login-submit){
   height: 30px;
@@ -59,8 +50,30 @@ header {
 
 /* end home page */
 
+/* header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  border-bottom: solid 1px rgba(0,0,0,.5);
+  padding: 5px 5px 5px 5px;
+  background-color: rgb(202, 248, 255);
+}
+
+.user-nav{
+  display: flex;
+  min-width: 25vw;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#logo{
+  margin-left: 10px;
+}
 
 
+/* end header */
 /* Experiment Single */
 
 /* single.experiment view */
