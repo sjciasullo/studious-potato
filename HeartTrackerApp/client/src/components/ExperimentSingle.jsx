@@ -207,7 +207,7 @@ class ExperimentSingle extends Component{
   submitEditData(e){
     e.preventDefault();
     const trial_id = this.state.trials[this.state.selectedTrial].id
-    const data_id = this.state.trialData[this.state.dataEditIndex]
+    const data_id = this.state.trialData[this.state.dataEditIndex].id
     fetch(`/trials/${trial_id}/data/${data_id}`, {
       method: 'PUT',
       headers: {

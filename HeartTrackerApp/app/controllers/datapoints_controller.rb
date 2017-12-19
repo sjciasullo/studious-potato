@@ -24,7 +24,7 @@ class DatapointsController < ApiController
 
   def update
     datapoint = Datapoint.find(params[:id])
-    if datapoint.update(trial_params)
+    if datapoint.update(datapoint_params)
       render json: {
         message: 'ok',
         datapoint: datapoint,
