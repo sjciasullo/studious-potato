@@ -23,12 +23,13 @@ class ExperimentSingle extends Component{
       selectedTrial: null,
       trialNotes: '',
       trialData: null,
+      newDataHeartrate: '',
     }
 
     this.createTrial = this.createTrial.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitTrialNotes = this.submitTrialNotes.bind(this);
-
+    this.submitData = this.submitData.bind(this);
   }
 
   getSingleExperiment(id) {
@@ -136,6 +137,32 @@ class ExperimentSingle extends Component{
     })
   }
 
+  submitData(e){
+    e.preventDefault();
+    const trial_id = this.state.trials[this.state.selectedTrial].id
+    fetch(`/trials/${trial_id}/data`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${Auth.getToken()}`,
+        token: Auth.getToken(),
+      },
+      body: JSON.stringify({
+        datapoint: {
+          heartrate: this.state.newDataHeartrate,
+        }
+      })
+    }).then( res => res.json())
+    .then( json => {
+      this.setState({
+        newDataHeartrate: ''
+      })
+      this.getTrialData(trial_id);
+    }).catch(err => {
+        console.log(err);
+    })
+  }
+
   getTrials(){
     fetch(`/experiments/${this.state.id}/trials`, {
       method: 'GET',
@@ -201,18 +228,32 @@ class ExperimentSingle extends Component{
                   <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
                   <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
                   <div>this will be a graph of the data</div>
-                  {this.state.trialData !== null && (
-                    <div>
-                      <h2>Datapoints list</h2> 
-                      {this.state.trialData.map((data, index) => {
-                        return (
-                          <div key={index}>
-                            Heartrate: {data.heartrate}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  )}
+                  <div className="datapoints-list-container">
+                    <h4>Datapoints list</h4>
+                    <form onSubmit={this.submitData}>
+                      <label> BPM
+                      <input 
+                        type='number'
+                        name='newDataHeartrate'
+                        onChange={this.handleChange}
+                        value={this.state.newDataHeartrate}
+                        placeholder='80'
+                      />
+                      <input type='submit' value='Create New Datapoint'/>
+                      </label>
+                    </form>
+                    {this.state.trialData !== null && ( 
+                      <div className="datapoints-list">
+                        {this.state.trialData.map((data, index) => {
+                          return (
+                            <div className='data-list-item' key={index}>
+                              Heartrate: {data.heartrate} BPM
+                            </div>
+                          )
+                        })}
+                      </div> 
+                    )}
+                  </div>
                   <div>
 
                   </div>
