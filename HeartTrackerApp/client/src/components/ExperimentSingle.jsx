@@ -196,17 +196,17 @@ class ExperimentSingle extends Component{
   -- on the edit submit, save it and set dataEditIndex back to null
   */
 
-  editHeartrateForm(data_index){
-    const heartrate = this.state.trialData[data_index].heartrate;
+  editHeartrateForm(dataIndex){
+    const heartrate = this.state.trialData[dataIndex].heartrate;
     this.setState({
-      dataEditIndex: data_index,
+      dataEditIndex: dataIndex,
       editHeartrate: heartrate,
     })
   }
 
   submitEditData(e){
     e.preventDefault();
-    const trial_id = this.state.trials[this.state.current_trial].id
+    const trial_id = this.state.trials[this.state.selectedTrial].id
     const data_id = this.state.trialData[this.state.dataEditIndex]
     fetch(`/trials/${trial_id}/data/${data_id}`, {
       method: 'PUT',
