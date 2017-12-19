@@ -4,10 +4,10 @@ const Header = function(props){
   const logout = props.logout; // logout method
   return(
     <header>
-      <div className='logo'>logo</div>
+      <div className='logo'><a href='/'>logo</a></div>
       <div className='user-nav'>
         <div>
-          username(link)
+          <a href='/dashboard'>username</a>
         </div>
         <button onClick={logout}>
           logout
