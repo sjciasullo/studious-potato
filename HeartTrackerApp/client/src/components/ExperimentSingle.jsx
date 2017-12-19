@@ -271,8 +271,8 @@ class ExperimentSingle extends Component{
                   {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
                     return (
                       <div className='trial-short' key={index}>
-                        <span onClick={()=>this.trialView(index)}>Trial {trial.trial_num} </span>
-                        Last Modified: {trial.updated_at}
+                        <span className="trial-list-item" onClick={()=>this.trialView(index)}>Trial {trial.trial_num} </span>
+                        <span className="trial-list-item">Last Modified: {trial.updated_at}</span>
                       </div>
                     )
                   })}

@@ -90,9 +90,21 @@ header {
 #trial-list{
   border: solid 1px black;
   padding: 2px;
-  
+  height: 80px;
+  overflow: scroll;
 }
 
+#trial-list:nth-child(odd){
+  background-color: gray;
+}
+
+#trial-list span{
+  margin: 0px 10px 0px 10px;
+}
+
+.trial-list-item{
+
+}
 /* single.trial view */
 #description{
   width: 400px;
