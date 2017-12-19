@@ -11,12 +11,14 @@ const LoginForm = function(props) {
   return(
     <div>
       <h2>Please login</h2>
-      <form onSubmit={submitLogin}>
+      <form className='login-form' onSubmit={submitLogin}>
         <input name="username" type='text' onChange={handleChange} 
           placeholder="Username" value={username}/>
+          <br />
         <input name="password" type='password' onChange={handleChange} 
           placeholder="Password" value={password}/>
-        <input type='submit' value="Log In"/>
+          <br />
+        <input className='login-submit' type='submit' value="Log In"/>
       </form>
       <p>Don't have an account? <span className='changeform' onClick={toggleForm}>Register</span></p>
     </div>

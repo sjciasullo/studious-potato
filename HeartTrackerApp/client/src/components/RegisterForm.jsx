@@ -13,15 +13,19 @@ const RegisterForm = function(props) {
   return(
     <div>
       <h2>Register new user</h2>
-      <form onSubmit={submitRegister}>
+      <form className='login-form' onSubmit={submitRegister}>
         <input name="name" type='text' onChange={handleChange} 
             placeholder="Name" value={name}/>
+            <br />
         <input name="username" type='text' onChange={handleChange} 
           placeholder="Username" value={username}/>
+          <br />
         <input name="password" type='password' onChange={handleChange} 
           placeholder="Password" value={password}/>
+          <br />
         <input name="email" type='text' onChange={handleChange} 
           placeholder="Email" value={email}/>
+          <br />
         <input type='submit' value="Register"/>
       </form>
       <p>Already have an account? <span className='changeform' onClick={toggleForm}>Login</span></p>
