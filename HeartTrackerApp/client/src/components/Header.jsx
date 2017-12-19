@@ -7,10 +7,12 @@ const Header = function(props){
       <div id='logo'><a href='/'><i className="fa fa-heartbeat fa-3x"></i></a></div>
       
       <div className='user-nav'>
-        <div>
-          <a href='/dashboard'>username</a>
-        </div>
-        <button onClick={logout}>
+        <a href='/dashboard'>
+          <button className='user-button'>
+          username
+          </button>
+        </a>
+        <button className='user-button' onClick={logout}>
           LOGOUT
         </button>
       </div>
