@@ -56,3 +56,47 @@ header {
   transform: scale(1.1);
   box-shadow: 0px 2px 12px -1px rgba(0,0,0,0.8);
 }
+
+/* end home page */
+
+
+
+/* Experiment Single */
+
+/* single.experiment view */
+#experiment-dates{
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: gray;
+  padding: 2px;
+}
+
+.graph{
+  border: solid 1px black;
+  margin: 0 auto;
+  width: 500px;
+  height: 300px;
+}
+
+#trial-list-container{
+  width: 400px;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+#trial-list{
+  border: solid 1px black;
+  padding: 2px;
+  
+}
+
+/* single.trial view */
+#description{
+  width: 400px;
+  margin: 0 auto;
+}
+
+/* End Experiment Single */

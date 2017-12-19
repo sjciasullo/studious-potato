@@ -258,34 +258,38 @@ class ExperimentSingle extends Component{
           {this.state.message !== 'Not your experiment!' && (
             <div>
               <a href={`/experiment/${this.state.id}`}><h3>{this.state.title}</h3></a>
+              <div>Current trial: {this.state.current_trial}</div>
+              <div id='experiment-dates'>
+                <div>Created: {this.state.created_at}</div>
+                <div>Updated: {this.state.updated_at}</div>
+              </div>
+              <div className='graph'>put a graph of the data here</div>
+              
+              <div id='trial-list-container'>
+                <button onClick={this.createTrial}>New Trial</button>
+                <div id='trial-list'>
+                  {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
+                    return (
+                      <div className='trial-short' key={index}>
+                        <span onClick={()=>this.trialView(index)}>Trial {trial.trial_num} </span>
+                        Last Modified: {trial.updated_at}
+                      </div>
+                    )
+                  })}
+                </div>
+                
+              </div>
+
               {!this.state.trialView && (
                 <div className='experiment-info-container'>
+                  <p id="description">Description: {this.state.description}</p>
                   <button onClick={() => this.props.deleteExperiment(this.state.id)}>Delete Experiment</button>
                   <button 
                     onClick={() => this.props.editExperiment(this.state.title, this.state.description, this.state.id)}>
                     Edit Experiment
                   </button>
-                  <p>{this.state.created_at}</p>
-                  <p>{this.state.updated_at}</p>
-                  <p>{this.state.description}</p>
-                  <p>current trial: {this.state.current_trial}</p>
-                  <div>put a graph of data here</div>
                 </div>
               )}
-              
-              
-              <div className='trial-list'>
-                {!this.state.trialView && <h4>Trials</h4>}
-                <button onClick={this.createTrial}>New Trial</button>
-                {(this.state.trials !== null) && this.state.trials.map((trial, index) => {
-                  return (
-                    <div className='trial-short' key={index}>
-                      <span onClick={()=>this.trialView(index)}>Trial {trial.trial_num}</span> 
-                      Last Modified: {trial.updated_at}
-                    </div>
-                  )
-                })}
-              </div>
 
               {this.state.trialView && (
                 <div className='trial-container'>
