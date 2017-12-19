@@ -9,6 +9,7 @@ import Auth from './modules/Auth';
 import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
 //style
+import './Reset.css';
 import './App.css';
 
 
