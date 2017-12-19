@@ -3,7 +3,7 @@ class DatapointsController < ApiController
 
   def index
     render json: {
-      data: Datapoint.all.where(trial_id: params[:trial_data])
+      data: Datapoint.all.where(trial_id: params[:trial_id]),
     }
   end
 
@@ -38,7 +38,7 @@ class DatapointsController < ApiController
 
   def destroy
     Datapoint.delete(params[:id])
-    render json: {message 'ok'}
+    render json: {message: 'ok'}
   end
 
   private
