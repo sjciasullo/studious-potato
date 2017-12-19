@@ -82,6 +82,9 @@
       - possible different view?
   
   #### extras
+  - add click on experiment description to edit it functionality
+    - also a hover effect to show that it's clickable
+
   - comment code more extensively
 
   - arduino hookup
