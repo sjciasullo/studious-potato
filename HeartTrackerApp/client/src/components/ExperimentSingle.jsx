@@ -222,6 +222,10 @@ class ExperimentSingle extends Component{
       })
     }).then( res => res.json())
     .then( json => {
+      this.setState({
+        dataEditIndex: null,
+        editHeartrate: '',
+      })
       this.getTrialData(trial_id);
     }).catch( err => {
       console.log(err);
