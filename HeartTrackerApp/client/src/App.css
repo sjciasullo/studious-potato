@@ -159,6 +159,7 @@ header {
 
 #trial-list{
   border: solid 1px black;
+  border-radius: 3px;
   padding: 2px;
   height: 80px;
   overflow: scroll;
@@ -176,13 +177,18 @@ header {
   margin: 0px 10px 0px 10px;
 }
 
-.trial-list-item{
-
-}
-
 #description{
   width: 400px;
   margin: 0 auto;
+}
+
+#trial-title{
+  margin: 20px auto 10px auto;
+  font-weight: bold;
+}
+
+.datapoints-list-container h4{
+  margin: 15px auto 5px auto;
 }
 
 /* End Experiment Single */

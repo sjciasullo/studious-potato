@@ -298,7 +298,7 @@ class ExperimentSingle extends Component{
 
               {this.state.trialView && (
                 <div className='trial-container'>
-                  <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
+                  <h4 id='trial-title'>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
                   <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
                   <div className='trial-graph'></div>
                   <div className="datapoints-list-container">
