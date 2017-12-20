@@ -157,8 +157,12 @@ header {
   overflow: scroll;
 }
 
-#trial-list:nth-child(odd){
+/* #trial-list:nth-child(odd){
   background-color: gray;
+} */
+
+.trial-short:hover{
+  background-color: #DDD
 }
 
 #trial-list span{
