@@ -50,11 +50,32 @@ class App extends Component {
     })
   }
 
+  componentDidMount(){
+    fetch('/profile', {
+      method: 'GET',
+      headers: {
+        token: Auth.getToken(),
+        'Authorization': `Token ${Auth.getToken()}`,
+      }
+    }).then(res => res.json())
+    .then( json => {
+      console.log(json);
+      if(json.user) {
+        this.setState({
+          auth: Auth.isUserAuthenticated(),
+          username: json.user.username
+        })
+      }
+    }).catch( err => {
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <Router >
         <div className="App">
-          {this.state.auth && <Header logout={this.logout} />}
+          {this.state.auth && <Header logout={this.logout} username={this.state.username}/>}
 
           {/* Home page has login and register form functionality */}
           <Route exact path='/' render={() =>
