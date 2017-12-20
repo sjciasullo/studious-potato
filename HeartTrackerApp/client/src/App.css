@@ -30,16 +30,18 @@ a:hover{
   transition: .1s;
 }
 
-button{
+button:not(.user-button){
   font-size: 12px;
+  font-weight: 700;
   padding: 7px;
+  border: 2px solid #DDD;
   border-radius: 3px;
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.26);
 }
 
 button:hover{
   cursor: pointer;
-  border: 1px solid rgb(230, 162, 162);
+  border: 2px solid rgb(230, 162, 162);
   transition: .2s;
 }
 
@@ -188,11 +190,12 @@ header {
 
 #trial-list-container{
   width: 400px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 5px;
 }
 
 #trial-list{
+  margin-top: 10px;
   border: solid 1px black;
   border-radius: 3px;
   padding: 2px;
@@ -214,7 +217,7 @@ header {
 
 #description{
   width: 400px;
-  margin: 0 auto;
+  margin: 15px auto;
 }
 
 #description span{
