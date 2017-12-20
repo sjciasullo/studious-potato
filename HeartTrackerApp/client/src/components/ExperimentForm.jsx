@@ -11,7 +11,7 @@ const ExperimentForm = function(props) {
   return(
     <div>
       {!edit ? <h2>Create Your Experiment!</h2> : <h2>Edit Your Experiment!</h2>}
-      <form onSubmit={submitExperiment}>
+      <form className='login-form' onSubmit={submitExperiment}>
         <input 
           type='text'
           name='experimentTitle'
@@ -19,6 +19,8 @@ const ExperimentForm = function(props) {
           value={experimentTitle}
           onChange={handleChange}
         />
+        <br />
+        <br />
         <input 
           type='text'
           name='experimentDescription'
@@ -26,8 +28,10 @@ const ExperimentForm = function(props) {
           value={experimentDescription}
           onChange={handleChange}
         />
+        <br />
+        <br />
         {/* input for warningFlags <input /> */}
-        <input type='submit' value='Save' />
+        <input className='login-submit' type='submit' value='Save' />
       </form>
       {edit && <button onClick={cancelEditExperiment}>Cancel</button>}
     </div>
