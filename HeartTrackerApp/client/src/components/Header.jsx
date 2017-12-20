@@ -9,7 +9,7 @@ const Header = function(props){
       <div className='user-nav'>
         <a href='/dashboard'>
           <button className='user-button'>
-          username
+            USERNAME
           </button>
         </a>
         <button className='user-button' onClick={logout}>
