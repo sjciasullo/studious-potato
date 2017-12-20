@@ -99,7 +99,7 @@ header {
 
 .user-button:hover, .user-button a:hover{
   color: white;
-  background-color: red;
+  background-color: rgb(255, 145, 145);
   border: 0;
 }
 
@@ -189,6 +189,15 @@ header {
 
 .datapoints-list-container h4{
   margin: 15px auto 5px auto;
+}
+
+.data-item-container{
+  display: flex;
+  justify-content: center;
+}
+
+.data-row:hover{
+  background-color: rgb(255, 145, 145);
 }
 
 /* End Experiment Single */
