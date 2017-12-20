@@ -258,12 +258,17 @@ class ExperimentSingle extends Component{
           {this.state.message !== 'Not your experiment!' && (
             <div>
               <a href={`/experiment/${this.state.id}`}><h3>{this.state.title}</h3></a>
-              <div>Current trial: {this.state.current_trial}</div>
-              <div id='experiment-dates'>
-                <div>Created: {this.state.created_at}</div>
-                <div>Updated: {this.state.updated_at}</div>
-              </div>
-              <div className='graph'>put a graph of the data here</div>
+              {!this.state.trialView && (
+                <div id='extra-experiment-info'>
+                  <div>Current trial: {this.state.current_trial}</div>
+                  <div id='experiment-dates'>
+                    <div>Created: {this.state.created_at}</div>
+                    <div>Updated: {this.state.updated_at}</div>
+                  </div>
+                </div>
+              )}
+              
+              {!this.state.trialView && <div className='experiment-graph'></div>}
               
               <div id='trial-list-container'>
                 <button onClick={this.createTrial}>New Trial</button>
@@ -295,7 +300,7 @@ class ExperimentSingle extends Component{
                 <div className='trial-container'>
                   <h4>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
                   <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
-                  <div>this will be a graph of the data</div>
+                  <div className='trial-graph'></div>
                   <div className="datapoints-list-container">
                     <h4>Datapoints list</h4>
                     <form onSubmit={this.submitData}>
