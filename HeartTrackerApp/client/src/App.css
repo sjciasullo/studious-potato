@@ -195,6 +195,7 @@ header {
 .data-item-container{
   display: flex;
   justify-content: center;
+  padding: 3px;
 }
 
 .data-row:hover{
