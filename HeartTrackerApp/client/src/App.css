@@ -113,7 +113,14 @@ header {
 
 /* Experiment Single */
 
-/* single.experiment view */
+#exp-title{
+  max-width: 500px;
+  overflow: ellipsis;
+  margin: 15px auto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 #experiment-dates{
   display: flex;
   justify-content: space-between;
@@ -172,7 +179,7 @@ header {
 .trial-list-item{
 
 }
-/* single.trial view */
+
 #description{
   width: 400px;
   margin: 0 auto;

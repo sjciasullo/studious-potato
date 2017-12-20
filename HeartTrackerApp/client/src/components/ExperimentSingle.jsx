@@ -257,7 +257,7 @@ class ExperimentSingle extends Component{
             
           {this.state.message !== 'Not your experiment!' && (
             <div>
-              <a href={`/experiment/${this.state.id}`}><h3>{this.state.title}</h3></a>
+              <h3 id='exp-title'><a href={`/experiment/${this.state.id}`}>{this.state.title}</a></h3>
               {!this.state.trialView && (
                 <div id='extra-experiment-info'>
                   <div>Current trial: {this.state.current_trial}</div>
