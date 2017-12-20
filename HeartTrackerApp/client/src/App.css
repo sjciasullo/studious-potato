@@ -112,6 +112,18 @@ header {
 
 /* end header */
 
+/* dashboard */
+.experiment-short{
+  width: 600px;
+  margin: 40px auto;
+  padding-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 5px 15px 1px rgba(0, 0, 0, 0.329);
+
+}
+/* end dashboard */
+
 /* Experiment Single */
 
 #exp-title{
@@ -203,3 +215,4 @@ header {
 }
 
 /* End Experiment Single */
+
