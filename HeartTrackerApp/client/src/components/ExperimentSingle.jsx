@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Auth from '../modules/Auth'
+import Auth from '../modules/Auth';
 
 class ExperimentSingle extends Component{
   /* prop list
@@ -250,6 +250,7 @@ class ExperimentSingle extends Component{
   }
 
   render(){
+
     return(
       <div>
         {this.state.apiLoaded ? (
@@ -287,7 +288,7 @@ class ExperimentSingle extends Component{
 
               {!this.state.trialView && (
                 <div className='experiment-info-container'>
-                  <p id="description">Description: {this.state.description}</p>
+                  <p id="description"><span>Description: </span>{this.state.description}</p>
                   <button onClick={() => this.props.deleteExperiment(this.state.id)}>Delete Experiment</button>
                   <button 
                     onClick={() => this.props.editExperiment(this.state.title, this.state.description, this.state.id)}>

@@ -217,6 +217,11 @@ header {
   margin: 0 auto;
 }
 
+#description span{
+  font-weight: 900;
+  font-size: 20px;
+}
+
 #trial-title{
   margin: 20px auto 10px auto;
   font-weight: bold;
