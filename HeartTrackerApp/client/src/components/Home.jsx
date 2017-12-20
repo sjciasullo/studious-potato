@@ -63,7 +63,7 @@ class Home extends Component{
         })
 
          // updates the state of auth in App
-         this.props.updateAuthState();
+         this.props.updateAuthState(json.username);
       } else {
         // if there is no token, this means failed login so display an error
         this.setState({
@@ -110,7 +110,7 @@ class Home extends Component{
           email: '',
         })
 
-        this.props.updateAuthState();
+        this.props.updateAuthState(json.username);
       } else {
         // if there is no token, this means register failed so display an error
         this.setState({

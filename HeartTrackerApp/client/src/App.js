@@ -18,16 +18,17 @@ class App extends Component {
     super();
     this.state= {
       auth: Auth.isUserAuthenticated(), // check if there is a token in storage
-      // do i need a username or something? we use 
+      username: null
     }
 
     this.updateAuthState = this.updateAuthState.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-  updateAuthState(){
+  updateAuthState(username){
     this.setState({
-      auth: Auth.isUserAuthenticated()
+      auth: Auth.isUserAuthenticated(),
+      username: username
     })
   }
 
@@ -42,7 +43,7 @@ class App extends Component {
       Auth.deauthenticateUser();
       this.setState({
         auth: Auth.isUserAuthenticated(),
-        //maybe reset username if we use it
+        username: ''
       })
     }).catch( err => {
       console.log(err);
