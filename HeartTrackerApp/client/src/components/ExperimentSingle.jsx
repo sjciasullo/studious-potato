@@ -338,11 +338,11 @@ class ExperimentSingle extends Component{
                             return (
                               <div className='data-item-container' key={index}>
                                 <button onClick={() => this.deleteDatapoint(data.id)}>-</button>
-                                <div onClick={() => this.editHeartrateForm(index)} 
+                                <p onClick={() => this.editHeartrateForm(index)} 
                                 className='data-row' 
                                 >
                                 Heartrate: {data.heartrate} BPM
-                                </div>
+                                </p>
                               </div>
                             )
                           }
