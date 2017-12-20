@@ -3,6 +3,8 @@
   font-weight: 200;
 }
 
+
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -24,6 +26,14 @@ a, a:visited {
 
 a:hover{
   color: red;
+  cursor: pointer;
+  transition: .1s;
+}
+
+button:hover{
+  cursor: pointer;
+  border: 1px solid rgb(230, 162, 162);
+  transition: .2s;
 }
 
 /* home page */
