@@ -3,8 +3,6 @@
   font-weight: 200;
 }
 
-
-
 input:focus,
 select:focus,
 textarea:focus,
@@ -256,15 +254,37 @@ header {
   margin: 15px auto 5px auto;
 }
 
+.datapoints-list-container {
+  background: rgba(0,0,0,0.3);
+  width: 300px;  
+  margin: 20px auto;
+  border-radius: 20px;
+  padding: 1px 20px 20px 20px;
+}
+
 .data-item-container{
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 3px;
+  margin-top:-2px;
+
 }
 
 .data-row:hover{
-  background-color: rgb(255, 145, 145);
+  border-bottom:2px solid rgb(255, 145, 145);
+  cursor: pointer
 }
 
 /* End Experiment Single */
+
+/* SINGLE TRIAL SECTION */
+
+.datapoints-list-container .delete{
+  height: 20px;
+  font-size: 30px;
+  line-height: 0px;
+  margin: 5px;
+
+}
 

@@ -339,7 +339,7 @@ class ExperimentSingle extends Component{
                             return (
                               <div className='data-item-container' key={index}>
                                 <button className='delete' onClick={() => this.deleteDatapoint(data.id)}>
-                                <i className="fa fa-minus"></i>
+                                -
                                 </button>
                                 <p onClick={() => this.editHeartrateForm(index)} 
                                 className='data-row' 
@@ -357,11 +357,12 @@ class ExperimentSingle extends Component{
                   <div>
 
                   </div>
-                  <div>
-                    Trial Notes:
+                  <div className="trial-note-container">
+                    <h4>Trial Notes:</h4>
                     <form onSubmit={this.submitTrialNotes}>
                       {/* <input type='text-area' name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}/> */}
                       <textarea name='trialNotes' onChange={this.handleChange} value={this.state.trialNotes}></textarea>
+                      <br/>
                       <input type='submit' value='Save' />
                     </form>
                   </div>
