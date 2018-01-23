@@ -46,6 +46,7 @@ class ExperimentsController < ApiController
           experiment_id: trial.experiment_id,
           created_at: trial.created_at.to_s(:long),
           updated_at: trial.updated_at.to_s(:long),
+          data: trial.datapoints,
         }
         formattedTrials.push(formatted)
       end
