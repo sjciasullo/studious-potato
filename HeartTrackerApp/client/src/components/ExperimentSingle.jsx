@@ -255,22 +255,30 @@ class ExperimentSingle extends Component{
       <div>
         {this.state.apiLoaded ? (
           <div>
-            
+
+          {/* Protect for user trying to access an experiment that's not theirs 
+            based on message back from API
+          */}
           {this.state.message !== 'Not your experiment!' && (
             <div>
               <h3 id='exp-title'><a href={`/experiment/${this.state.id}`}>{this.state.title}</a></h3>
+
+              {/* Experiment View Header */}
               {!this.state.trialView && (
-                <div id='extra-experiment-info'>
-                  <div>Current trial: {this.state.current_trial}</div>
-                  <div id='experiment-dates'>
-                    <div>Created: {this.state.created_at}</div>
-                    <div>Updated: {this.state.updated_at}</div>
+                <div>
+                  <div id='extra-experiment-info'>
+                    <div>Current trial: {this.state.current_trial}</div>
+                    <div id='experiment-dates'>
+                      <div>Created: {this.state.created_at}</div>
+                      <div>Updated: {this.state.updated_at}</div>
+                    </div>
                   </div>
+                  <div className='experiment-graph'></div>
                 </div>
               )}
-              
-              {!this.state.trialView && <div className='experiment-graph'></div>}
-              
+              {/* End Experiment View Header */}
+                          
+              {/* Show list of trials regardless of view type */}
               <div id='trial-list-container'>
                 <button onClick={this.createTrial}>New Trial</button>
                 <div id='trial-list'>
@@ -283,9 +291,10 @@ class ExperimentSingle extends Component{
                     )
                   })}
                 </div>
-                
               </div>
+              {/* End Trial List */}
 
+              {/* Only show Experiment Description for Experiment View */}
               {!this.state.trialView && (
                 <div className='experiment-info-container'>
                   <p id="description"><span>Description: </span>{this.state.description}</p>
@@ -296,7 +305,9 @@ class ExperimentSingle extends Component{
                   </button>
                 </div>
               )}
+              {/* End Experiment Description */}
 
+              {/* Trial View */}
               {this.state.trialView && (
                 <div className='trial-container'>
                   <h4 id='trial-title'>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
@@ -368,6 +379,7 @@ class ExperimentSingle extends Component{
                   </div>
                 </div>
               )}
+              {/* End Trial View */}
     
             </div>
             
