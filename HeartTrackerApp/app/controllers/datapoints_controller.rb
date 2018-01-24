@@ -3,7 +3,7 @@ class DatapointsController < ApiController
 
   def index
     render json: {
-      data: Datapoint.all.where(trial_id: params[:trial_id]),
+      data: Datapoint.all.where(trial_id: params[:trial_id]).reorder(:created_at),
     }
   end
 

@@ -32,7 +32,7 @@ class TrialsController < ApiController
     }
     render json: {
       trial: formatted,
-      data: trial.datapoints.reorder(:heartrate),
+      data: trial.datapoints.reorder(:created_at),
     }
   end
 
