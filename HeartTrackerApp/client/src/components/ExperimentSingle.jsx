@@ -93,7 +93,6 @@ class ExperimentSingle extends Component{
       }
     }).then( res => res.json())
     .then( json => {
-      console.log('data is: ', json.data)
       this.setState({
         trialData: json.data
       })
