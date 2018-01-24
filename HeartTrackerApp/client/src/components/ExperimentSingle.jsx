@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth';
+import ExperimentGraph from './ExperimentGraph';
 
 class ExperimentSingle extends Component{
   /* prop list
@@ -273,7 +274,7 @@ class ExperimentSingle extends Component{
                       <div>Updated: {this.state.updated_at}</div>
                     </div>
                   </div>
-                  <div className='experiment-graph'></div>
+                  <ExperimentGraph />
                 </div>
               )}
               {/* End Experiment View Header */}
@@ -312,7 +313,8 @@ class ExperimentSingle extends Component{
                 <div className='trial-container'>
                   <h4 id='trial-title'>Trial {this.state.trials[this.state.selectedTrial].trial_num}</h4>
                   <div>Last Modified: {this.state.trials[this.state.selectedTrial].updated_at}</div>
-                  <div className='trial-graph'></div>
+                  <ExperimentGraph />
+                  {/* placeholder had className trial-graph */}
                   <div className="datapoints-list-container">
                     <h4>Datapoints list</h4>
                     <form onSubmit={this.submitData}>

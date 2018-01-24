@@ -8,7 +8,9 @@ import * as d3 from 'd3';
 class ExperimentGraph extends Component {
   render() {
     return(
-      <div ref='graph'></div>
+      <div ref='graph' className='experiment-graph'></div>
     )
   }
 }
+
+export default ExperimentGraph;
