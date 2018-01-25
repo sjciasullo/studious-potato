@@ -62,8 +62,8 @@ class ExperimentGraph extends Component {
     // -- domains are hard coded will need to be adjusted
     const xScale = d3.scaleLinear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0,7])
     const yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([40,110])
-    const xAxis = d3.svg.axis().scale(xScale);
-    const yAxis = d3.svg.axis().scale(yScale);
+    const xAxis = context.axis().scale(xScale);
+    const yAxis = context.axis().scale(yScale);
 
     context.append("svg:g").call(xAxis);
 
