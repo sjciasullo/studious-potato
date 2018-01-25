@@ -6,10 +6,30 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 
 class ExperimentGraph extends Component {
+  //test data
+  data = [{
+    "datapoint number": "0",
+    "heartrate": "80"
+  }, {
+    "datapoint number": "1",
+    "heartrate": "85"
+  }, {
+    "datapoint number": "2",
+    "heartrate": "90"
+  }, {
+    "datapoint number": "3",
+    "heartrate": "100"
+  }, {
+    "datapoint number": "4",
+    "heartrate": "50"
+  }, {
+    "datapoint number": "5",
+    "heartrate": "80"
+  }]
 
   //when component mounts, set the context of an svg file that d3 will create
   componentDidMount() {
-    this.setContext();
+    const context = this.setContext();
   }
 
   // called when component mounts to give d3 a canvas (svg file) to draw on
@@ -19,8 +39,15 @@ class ExperimentGraph extends Component {
       .attr('height', '300px')
       .attr('width', '500px')
       .attr('id', 'graph')
+      /*
       .append('g') // are we appending a graph on the svg canvas after setting the svg attrs?
       .attr('transform', `translate(150, 150)`); // what does this transform do?
+      */
+  }
+
+  drawAxes(context) {
+    return context.append('path')
+      .datum({ })
   }
 
   render() {
